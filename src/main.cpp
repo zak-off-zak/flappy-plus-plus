@@ -1,21 +1,28 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Window/Event.hpp>
+#include <SFML/Window/VideoMode.hpp>
+#include <SFML/Window/WindowEnums.hpp>
 
-int main()
-{
-    auto window = sf::RenderWindow(sf::VideoMode({1920u, 1080u}), "CMake SFML Project");
-    window.setFramerateLimit(144);
+int main() {
+  sf::RenderWindow window(sf::VideoMode({512, 512}), "Flappy Bird",
+                          sf::Style::Close | sf::Style::Titlebar);
 
-    while (window.isOpen())
-    {
-        while (const std::optional event = window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-            {
-                window.close();
-            }
-        }
+  sf::CircleShape circle(50.f);
+  circle.setFillColor(sf::Color(100, 250, 50));
+  circle.setPosition({200.f, 200.f});
 
-        window.clear();
-        window.display();
+  while (window.isOpen()) {
+    while (const std::optional event = window.pollEvent()) {
+      if (event->is<sf::Event::Closed>()) {
+        window.close();
+      }
     }
+    window.clear(sf::Color::Black);
+    window.draw(circle);
+    window.display();
+  }
+  return 0;
 }
