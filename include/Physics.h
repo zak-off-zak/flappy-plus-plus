@@ -21,7 +21,8 @@ public:
   void apply_force(sf::Vector2<float> force);
 
   sf::Vector2<float> get_velocity(float time);
-  sf::Vector2<float> get_postion(float time);
+  sf::Vector2<float> get_position(float time);
+  void update(float time);
 
 protected:
 private:

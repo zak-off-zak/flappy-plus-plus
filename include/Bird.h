@@ -11,8 +11,8 @@ public:
   Bird(float x, float y, float mass, const sf::Texture &texture);
 
   void draw(sf::RenderWindow &window);
-  void update_position(float time);
-  void flap();
+  void update_sprite(float time);
+  void flap(float &time, sf::RenderWindow &window);
 
 protected:
 private:

@@ -1,15 +1,21 @@
 #include "../include/GameLoop.h"
 #include "../include/Bird.h"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <iostream>
 
 void game_loop(sf::RenderWindow &window, Bird &bird, float &time) {
   while (window.isOpen()) {
-    time += 0.1;
-    bird.update_position(time);
+    time += 0.001;
+    bird.update_sprite(time);
+    bool spaceWasPressed = false;
+    std::cout << bird.acceleration.x << ' ' << bird.acceleration.y << std::endl;
     while (const std::optional event = window.pollEvent()) {
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-        bird.flap();
+      bool spaceIsPressed =
+          sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space);
+      if (spaceIsPressed && !spaceWasPressed) {
+        bird.flap(time, window);
       }
+      spaceWasPressed = spaceIsPressed;
       if (event->is<sf::Event::Closed>()) {
         window.close();
       }

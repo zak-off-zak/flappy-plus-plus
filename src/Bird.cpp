@@ -11,8 +11,18 @@ Bird::Bird(float x, float y, float mass, const sf::Texture &texture)
 
 void Bird::draw(sf::RenderWindow &window) { window.draw(this->sprite); }
 
-void Bird::update_position(float time) {
-  this->sprite.setPosition(this->get_postion(time));
+void Bird::update_sprite(float time) {
+  this->update(time);
+  this->sprite.setPosition(this->position);
 }
 
-void Bird::flap() { this->apply_force({0, -10}); }
+void Bird::flap(float &time, sf::RenderWindow &window) {
+  for (int i = 0; i < 3; i++) {
+    this->apply_force({0, -0.1});
+    time++;
+    this->update_sprite(time);
+    this->draw(window);
+  }
+  this->apply_force({0, 0.1});
+  this->update_sprite(time);
+}

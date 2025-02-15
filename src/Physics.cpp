@@ -40,11 +40,21 @@ sf::Vector2<float> Object::get_velocity(float time) {
   return return_velocity;
 }
 
-sf::Vector2<float> Object::get_postion(float time) {
+sf::Vector2<float> Object::get_position(float time) {
   sf::Vector2<float> return_position;
   return_position.x = this->position.x + this->velocity.x * time +
                       this->acceleration.x * (time * time) / 2;
   return_position.y = this->position.y + this->velocity.y * time +
                       this->acceleration.y * (time * time) / 2;
   return return_position;
+}
+
+void Object::update(float time) {
+  this->velocity.x += this->acceleration.x * time;
+  this->velocity.y += this->acceleration.y * time;
+
+  this->position.x +=
+      this->velocity.x * time + 0.5f * this->acceleration.x * time * time;
+  this->position.y +=
+      this->velocity.y * time + 0.5f * this->acceleration.y * time * time;
 }
