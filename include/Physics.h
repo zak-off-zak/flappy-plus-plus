@@ -1,16 +1,15 @@
 #ifndef PHYSICS
 #define PHYSICS
 
-struct Vector2D {
-  float x;
-  float y;
-};
+#include <SFML/System/Vector2.hpp>
+
+constexpr sf::Vector2<float> GRAVITY = {0, 9.81f};
 
 class Object {
 public:
-  Vector2D position;
-  Vector2D velocity;
-  Vector2D acceleration;
+  sf::Vector2<float> position;
+  sf::Vector2<float> velocity;
+  sf::Vector2<float> acceleration;
   float mass;
 
   Object(float x, float y, float mass);
@@ -19,10 +18,10 @@ public:
   void set_velocity(float x, float y);
   void set_acceleration(float x, float y);
 
-  void apply_force(Vector2D force);
+  void apply_force(sf::Vector2<float> force);
 
-  Vector2D get_velocity(float time);
-  Vector2D get_postion(float time);
+  sf::Vector2<float> get_velocity(float time);
+  sf::Vector2<float> get_postion(float time);
 
 protected:
 private:

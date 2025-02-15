@@ -1,4 +1,5 @@
 #include "../include/Physics.h"
+#include <SFML/System/Vector2.hpp>
 
 Object::Object(float x, float y, float mass) {
   this->position.x = x;
@@ -27,19 +28,20 @@ void Object::set_acceleration(float x, float y) {
   this->acceleration.y = y;
 }
 
-void Object::apply_force(Vector2D force) {
-  set_acceleration(force.x / this->mass, force.y / this->mass);
+void Object::apply_force(sf::Vector2<float> force) {
+  set_acceleration(this->acceleration.x + force.x / this->mass,
+                   this->acceleration.y + force.y / this->mass);
 }
 
-Vector2D Object::get_velocity(float time) {
-  Vector2D return_velocity;
+sf::Vector2<float> Object::get_velocity(float time) {
+  sf::Vector2<float> return_velocity;
   return_velocity.x = this->velocity.x + this->acceleration.x * time;
   return_velocity.y = this->velocity.y + this->acceleration.y * time;
   return return_velocity;
 }
 
-Vector2D Object::get_postion(float time) {
-  Vector2D return_position;
+sf::Vector2<float> Object::get_postion(float time) {
+  sf::Vector2<float> return_position;
   return_position.x = this->position.x + this->velocity.x * time +
                       this->acceleration.x * (time * time) / 2;
   return_position.y = this->position.y + this->velocity.y * time +
