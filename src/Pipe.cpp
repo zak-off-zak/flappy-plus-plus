@@ -1,7 +1,6 @@
 #include "../include/Pipe.h"
 #include <SFML/Graphics/Rect.hpp>
 #include <iostream>
-#include <stdexcept>
 
 Pipe::Pipe(float inital_position, float gap_position, float gap_size,
            float speed, const sf::Texture &texture)
@@ -11,6 +10,7 @@ Pipe::Pipe(float inital_position, float gap_position, float gap_size,
   this->inital_position = inital_position;
   this->gap_position = gap_position;
   this->gap_size = gap_size;
+  this->speed = speed;
 
   sf::IntRect pipe_rect({0, 0}, {200, 700});
   this->lower_pipe.setTextureRect(pipe_rect);
@@ -33,4 +33,23 @@ Pipe::Pipe(float inital_position, float gap_position, float gap_size,
 void Pipe::draw(sf::RenderWindow &window) {
   window.draw(this->lower_pipe);
   window.draw(this->upper_pipe);
+}
+
+sf::FloatRect Pipe::get_upper_bounds() const {
+  return this->upper_pipe.getGlobalBounds();
+}
+
+sf::FloatRect Pipe::get_lower_bounds() const {
+  return this->lower_pipe.getGlobalBounds();
+}
+
+bool Pipe::is_off_screen() const {
+  return (this->upper_pipe.getPosition().x +
+              this->upper_pipe.getGlobalBounds().size.x <
+          0);
+}
+
+void Pipe::update(float time) {
+  this->upper_pipe.move({-this->speed * time, 0.f});
+  this->lower_pipe.move({-this->speed * time, 0.f});
 }

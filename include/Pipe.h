@@ -10,6 +10,10 @@ public:
        const sf::Texture &texture);
 
   void draw(sf::RenderWindow &window);
+  sf::FloatRect get_upper_bounds() const;
+  sf::FloatRect get_lower_bounds() const;
+  bool is_off_screen() const;
+  void update(float time);
 
 protected:
 private:

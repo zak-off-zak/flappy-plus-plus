@@ -26,6 +26,7 @@ void game_loop() {
   while (window.isOpen()) {
     time += 0.00001;
     bird.update_sprite(time);
+    pipe.update(time);
     bool spaceWasPressed = false;
     while (const std::optional event = window.pollEvent()) {
       bool spaceIsPressed =
