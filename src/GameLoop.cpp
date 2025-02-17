@@ -13,7 +13,7 @@ void game_loop() {
     std::cerr << "Error loading bird texture!" << std::endl;
   }
 
-  Bird bird(212.f, 100.f, 15, -15, bird_texture);
+  Bird bird(212.f, 100.f, 10, -15, bird_texture);
   bird.apply_force(GRAVITY);
 
   sf::Texture pipe_texture;
@@ -22,14 +22,15 @@ void game_loop() {
   }
   std::vector<Pipe> pipes;
   for (int i = 0; i < 3; i++) {
-    pipes.push_back(Pipe(i * 300, 300, 250, 10, pipe_texture));
+    pipes.push_back(
+        Pipe(window.getSize().x / 3 + i * 300, 300, 250, 0.0001, pipe_texture));
   }
 
-  float time = 0;
+  sf::Clock clock;
 
   while (window.isOpen()) {
-    time += 0.00001;
-    bird.update_sprite(time);
+    float time = clock.restart().asMicroseconds();
+    bird.update_sprite(time / 100000);
     for (auto &pipe : pipes) {
       pipe.update(time);
     }
@@ -50,7 +51,7 @@ void game_loop() {
                 pipes.end());
     window.clear(sf::Color::Black);
     bird.draw(window);
-    for (auto pipe : pipes) {
+    for (auto &pipe : pipes) {
       pipe.draw(window);
     }
     window.display();
