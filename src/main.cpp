@@ -21,7 +21,7 @@ int main() {
     std::cerr << "Error loading texture!" << std::endl;
   }
 
-  Bird bird(512.f, 100.f, 100, birdTexture);
+  Bird bird(512.f, 100.f, 15, -15, birdTexture);
   sf::CircleShape circle(50.f);
   bird.apply_force(GRAVITY);
 

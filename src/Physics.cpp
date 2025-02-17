@@ -1,5 +1,6 @@
 #include "../include/Physics.h"
 #include <SFML/System/Vector2.hpp>
+#include <algorithm>
 
 Object::Object(float x, float y, float mass) {
   this->position.x = x;
@@ -19,8 +20,8 @@ void Object::set_position(float x, float y) {
 }
 
 void Object::set_velocity(float x, float y) {
-  this->velocity.x = x;
-  this->velocity.y = y;
+  this->velocity.x = std::min(x, 30.0f);
+  this->velocity.y = std::min(y, 30.0f);
 }
 
 void Object::set_acceleration(float x, float y) {
@@ -50,8 +51,8 @@ sf::Vector2<float> Object::get_position(float time) {
 }
 
 void Object::update(float time) {
-  this->velocity.x += this->acceleration.x * time;
-  this->velocity.y += this->acceleration.y * time;
+  this->set_velocity(this->velocity.x += this->acceleration.x * time,
+                     this->velocity.y += this->acceleration.y * time);
 
   this->position.x +=
       this->velocity.x * time + 0.5f * this->acceleration.x * time * time;

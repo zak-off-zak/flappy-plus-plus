@@ -8,7 +8,8 @@
 
 class Bird : public Object {
 public:
-  Bird(float x, float y, float mass, const sf::Texture &texture);
+  Bird(float x, float y, float mass, float falp_strength,
+       const sf::Texture &texture);
 
   void draw(sf::RenderWindow &window);
   void update_sprite(float time);
@@ -18,6 +19,7 @@ protected:
 private:
   sf::Sprite sprite;
   sf::Texture texture;
+  float falp_strength;
 };
 
 #endif // !BIRD
