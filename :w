@@ -29,8 +29,8 @@ void game_loop() {
   std::vector<Pipe> pipes;
   for (int i = 0; i < 7; i++) {
     float gap_position = gap_heit_dist(rng);
-    pipes.push_back(Pipe(window.getSize().x + i * pipe_spacing, gap_position,
-                         250, 0.0001, pipe_texture));
+    pipes.push_back(Pipe(window.getSize().x / 2 + i * pipe_spacing,
+                         gap_position, 250, 0.0001, pipe_texture));
   }
 
   sf::Clock clock;
@@ -46,10 +46,13 @@ void game_loop() {
     }
     for (auto &pipe : pipes) {
       pipe.update(time);
-      if (bird.is_collided(window, pipe)) {
+      // if (check_collision(bird.getBounds(), pipe.get_upper_bounds()) ||
+      //     check_collision(bird.getBounds(), pipe.get_lower_bounds())) {
+      //   std::cout << "Collision with a pipe!" << std::endl;
+      // }
+      if (bird.collided_with_screen_borders(window)) {
 
-        std::cout << "Collision detected!" << std::endl;
-        exit(-1);
+        std::cout << "Collision with the sreen borders!" << std::endl;
       }
     }
     bool spaceWasPressed = false;

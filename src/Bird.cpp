@@ -1,4 +1,5 @@
 #include "../include/Bird.h"
+#include "../include/CollisionManager.h"
 #include <SFML/Graphics/Sprite.hpp>
 
 Bird::Bird(float x, float y, float mass, float falp_strength,
@@ -23,3 +24,30 @@ void Bird::flap(float &time, sf::RenderWindow &window) {
 }
 
 sf::FloatRect Bird::getBounds() const { return this->sprite.getGlobalBounds(); }
+
+bool Bird::collided_with_screen_borders(sf::RenderWindow &window) {
+  if (this->getBounds().position.x < 0 ||
+      this->getBounds().position.x + this->getBounds().size.x >
+          window.getSize().x) {
+    return true;
+  }
+  if (this->getBounds().position.y < 0 ||
+      this->getBounds().position.y + this->getBounds().size.y >
+          window.getSize().y) {
+    return true;
+  }
+  return false;
+}
+
+bool Bird::collided_with_pipe(Pipe &pipe) {
+  if (check_collision(this->getBounds(), pipe.get_upper_bounds()) ||
+      check_collision(this->getBounds(), pipe.get_lower_bounds())) {
+    return true;
+  }
+  return false;
+}
+
+bool Bird::is_collided(sf::RenderWindow &window, Pipe &pipe) {
+  return this->collided_with_pipe(pipe) ||
+         this->collided_with_screen_borders(window);
+}

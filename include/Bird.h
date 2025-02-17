@@ -2,6 +2,7 @@
 #define BIRD
 
 #include "Physics.h"
+#include "Pipe.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -15,12 +16,16 @@ public:
   void update_sprite(float time);
   void flap(float &time, sf::RenderWindow &window);
   sf::FloatRect getBounds() const;
+  bool is_collided(sf::RenderWindow &window, Pipe &pipe);
 
 protected:
 private:
   sf::Sprite sprite;
   sf::Texture texture;
   float falp_strength;
+
+  bool collided_with_screen_borders(sf::RenderWindow &window);
+  bool collided_with_pipe(Pipe &pipe);
 };
 
 #endif // !BIRD
