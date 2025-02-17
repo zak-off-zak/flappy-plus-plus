@@ -21,3 +21,5 @@ void Bird::update_sprite(float time) {
 void Bird::flap(float &time, sf::RenderWindow &window) {
   this->set_velocity(this->velocity.x, this->falp_strength);
 }
+
+sf::FloatRect Bird::getBounds() const { return this->sprite.getGlobalBounds(); }

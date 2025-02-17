@@ -1,5 +1,6 @@
 #include "../include/GameLoop.h"
 #include "../include/Bird.h"
+#include "../include/CollisionManager.h"
 #include "../include/Pipe.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <iostream>
@@ -45,6 +46,10 @@ void game_loop() {
     }
     for (auto &pipe : pipes) {
       pipe.update(time);
+      if (check_collision(bird.getBounds(), pipe.get_upper_bounds()) ||
+          check_collision(bird.getBounds(), pipe.get_lower_bounds())) {
+        std::cout << "Collision with a pipe!" << std::endl;
+      }
     }
     bool spaceWasPressed = false;
     while (const std::optional event = window.pollEvent()) {
