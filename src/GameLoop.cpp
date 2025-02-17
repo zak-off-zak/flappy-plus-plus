@@ -3,6 +3,7 @@
 #include "../include/Pipe.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <iostream>
+#include <random>
 #include <vector>
 
 void game_loop() {
@@ -20,17 +21,28 @@ void game_loop() {
   if (!pipe_texture.loadFromFile("assets/images/pipe2.png")) {
     std::cerr << "Error loading pipe texture!" << std::endl;
   }
+
+  std::mt19937 rng(std::random_device{}());
+  std::uniform_int_distribution<int> gap_heit_dist(200, 500);
+  float pipe_spacing = 200;
   std::vector<Pipe> pipes;
-  for (int i = 0; i < 3; i++) {
-    pipes.push_back(
-        Pipe(window.getSize().x / 3 + i * 300, 300, 250, 0.0001, pipe_texture));
+  for (int i = 0; i < 7; i++) {
+    float gap_position = gap_heit_dist(rng);
+    pipes.push_back(Pipe(window.getSize().x / 2 + i * pipe_spacing,
+                         gap_position, 250, 0.0001, pipe_texture));
   }
 
   sf::Clock clock;
-
   while (window.isOpen()) {
     float time = clock.restart().asMicroseconds();
-    bird.update_sprite(time / 100000);
+    bird.update_sprite(time / 50000);
+    if (!pipes.empty() && pipes.front().is_off_screen()) {
+      float last_pipe_x = pipes.back().get_upper_bounds().position.x;
+      pipes.erase(pipes.begin());
+      float gap_position = gap_heit_dist(rng);
+      pipes.push_back(Pipe(last_pipe_x + pipe_spacing, gap_position, 250,
+                           0.0001, pipe_texture));
+    }
     for (auto &pipe : pipes) {
       pipe.update(time);
     }
@@ -46,9 +58,6 @@ void game_loop() {
         window.close();
       }
     }
-    pipes.erase(std::remove_if(pipes.begin(), pipes.end(),
-                               [](const Pipe &p) { return p.is_off_screen(); }),
-                pipes.end());
     window.clear(sf::Color::Black);
     bird.draw(window);
     for (auto &pipe : pipes) {

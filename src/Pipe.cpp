@@ -1,6 +1,6 @@
 #include "../include/Pipe.h"
 #include <SFML/Graphics/Rect.hpp>
-#include <iostream>
+#include <SFML/Graphics/RectangleShape.hpp>
 
 Pipe::Pipe(float inital_position, float gap_position, float gap_size,
            float speed, const sf::Texture &texture)
@@ -12,19 +12,23 @@ Pipe::Pipe(float inital_position, float gap_position, float gap_size,
   this->gap_size = gap_size;
   this->speed = speed;
 
-  sf::IntRect pipe_rect({0, 0}, {200, 700});
+  sf::IntRect pipe_rect({0, 0}, {300, 700});
   this->lower_pipe.setTextureRect(pipe_rect);
   this->upper_pipe.setTextureRect(pipe_rect);
 
   sf::Vector2u texture_size = texture.getSize();
 
-  float scale_x =
-      static_cast<float>(pipe_rect.size.x) / static_cast<float>(texture_size.x);
-  float scale_y =
-      static_cast<float>(pipe_rect.size.y) / static_cast<float>(texture_size.y);
-
-  this->lower_pipe.setScale({scale_x, scale_y});
-  this->upper_pipe.setScale({scale_x, -scale_y});
+  // float scale_x =
+  //     static_cast<float>(pipe_rect.size.x) /
+  //     static_cast<float>(texture_size.x);
+  // float scale_y =
+  //     static_cast<float>(pipe_rect.size.y) /
+  //     static_cast<float>(texture_size.y);
+  //
+  // this->lower_pipe.setScale({scale_x, scale_y});
+  // this->upper_pipe.setScale({scale_x, -scale_y});
+  this->lower_pipe.setScale({1.f, 1.f});
+  this->upper_pipe.setScale({1.f, -1.f});
 
   this->upper_pipe.setPosition({inital_position, gap_position});
   this->lower_pipe.setPosition({inital_position, gap_position + gap_size});
