@@ -4,6 +4,6 @@
 #include "Bird.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 
-void game_loop(sf::RenderWindow &window, Bird &bird, float &time);
+void game_loop();
 
 #endif // !GAME_LOOP
