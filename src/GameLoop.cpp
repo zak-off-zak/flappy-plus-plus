@@ -3,6 +3,7 @@
 #include "../include/Pipe.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <iostream>
+#include <vector>
 
 void game_loop() {
   sf::RenderWindow window(sf::VideoMode({1024, 700}), "Flappy Bird",
@@ -19,14 +20,19 @@ void game_loop() {
   if (!pipe_texture.loadFromFile("assets/images/pipe2.png")) {
     std::cerr << "Error loading pipe texture!" << std::endl;
   }
-  Pipe pipe(612, 300, 250, 10, pipe_texture);
+  std::vector<Pipe> pipes;
+  for (int i = 0; i < 3; i++) {
+    pipes.push_back(Pipe(i * 300, 300, 250, 10, pipe_texture));
+  }
 
   float time = 0;
 
   while (window.isOpen()) {
     time += 0.00001;
     bird.update_sprite(time);
-    pipe.update(time);
+    for (auto &pipe : pipes) {
+      pipe.update(time);
+    }
     bool spaceWasPressed = false;
     while (const std::optional event = window.pollEvent()) {
       bool spaceIsPressed =
@@ -39,9 +45,14 @@ void game_loop() {
         window.close();
       }
     }
+    pipes.erase(std::remove_if(pipes.begin(), pipes.end(),
+                               [](const Pipe &p) { return p.is_off_screen(); }),
+                pipes.end());
     window.clear(sf::Color::Black);
     bird.draw(window);
-    pipe.draw(window);
+    for (auto pipe : pipes) {
+      pipe.draw(window);
+    }
     window.display();
   }
 }
