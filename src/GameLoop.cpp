@@ -27,7 +27,6 @@ void game_loop() {
                               float(window_size.y) / background_bounds.size.y});
 
   sf::Texture bird_texture;
-  // if (!bird_texture.loadFromFile("assets/images/llama_default.png")) {
   if (!bird_texture.loadFromFile("assets/tappyplane/Spritesheet/planes.png")) {
     std::cerr << "Error loading bird texture!" << std::endl;
   }

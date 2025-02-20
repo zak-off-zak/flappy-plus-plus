@@ -1,5 +1,6 @@
 #include "../include/Bird.h"
-#include "../include/CollisionManager.h"
+#include "../include/Utilities.h"
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 Bird::Bird(float x, float y, float mass, float falp_strength,
@@ -7,9 +8,10 @@ Bird::Bird(float x, float y, float mass, float falp_strength,
     : Object(x, y, mass), sprite(texture) {
   this->texture = texture;
   this->sprite.setTexture(texture);
+  this->sprite.setTextureRect(sf::IntRect({88, 0}, {88, 72}));
   this->sprite.setPosition({x, y});
   this->falp_strength = falp_strength;
-  this->sprite.setScale({0.5, 0.5});
+  // this->sprite.setScale({0.5, 0.5});
 }
 
 void Bird::draw(sf::RenderWindow &window) { window.draw(this->sprite); }
