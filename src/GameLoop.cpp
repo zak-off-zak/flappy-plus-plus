@@ -1,8 +1,10 @@
 #include "../include/GameLoop.h"
 #include "../include/Bird.h"
-#include "../include/CollisionManager.h"
 #include "../include/Pipe.h"
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <iostream>
 #include <random>
 #include <vector>
@@ -10,8 +12,23 @@
 void game_loop() {
   sf::RenderWindow window(sf::VideoMode({1024, 700}), "Flappy Bird",
                           sf::Style::Close | sf::Style::Titlebar);
+  sf::Texture background_texture;
+  if (!background_texture.loadFromFile(
+          "assets/tappyplane/PNG/background.png")) {
+    std::cerr << "Error loading background texture!" << std::endl;
+  }
+
+  sf::Sprite background_sprite(background_texture);
+  background_sprite.setTexture(background_texture);
+
+  sf::Vector2u window_size = window.getSize();
+  sf::FloatRect background_bounds = background_sprite.getGlobalBounds();
+  background_sprite.setScale({float(window_size.x) / background_bounds.size.x,
+                              float(window_size.y) / background_bounds.size.y});
+
   sf::Texture bird_texture;
-  if (!bird_texture.loadFromFile("assets/images/llama_default.png")) {
+  // if (!bird_texture.loadFromFile("assets/images/llama_default.png")) {
+  if (!bird_texture.loadFromFile("assets/tappyplane/Spritesheet/planes.png")) {
     std::cerr << "Error loading bird texture!" << std::endl;
   }
 
@@ -49,7 +66,7 @@ void game_loop() {
       if (bird.is_collided(window, pipe)) {
 
         std::cout << "Collision detected!" << std::endl;
-        exit(-1);
+        // exit(-1);
       }
     }
     bool spaceWasPressed = false;
@@ -65,6 +82,7 @@ void game_loop() {
       }
     }
     window.clear(sf::Color::Black);
+    window.draw(background_sprite);
     bird.draw(window);
     for (auto &pipe : pipes) {
       pipe.draw(window);
