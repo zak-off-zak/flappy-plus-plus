@@ -8,10 +8,10 @@ Bird::Bird(float x, float y, float mass, float falp_strength,
     : Object(x, y, mass), sprite(texture) {
   this->texture = texture;
   this->sprite.setTexture(texture);
-  this->sprite.setTextureRect(sf::IntRect({88, 0}, {88, 72}));
+  this->sprite.setTextureRect(sf::IntRect({88, 0}, {88, 73}));
   this->sprite.setPosition({x, y});
   this->falp_strength = falp_strength;
-  // this->sprite.setScale({0.5, 0.5});
+  this->apply_force(this->mass * GRAVITY);
 }
 
 void Bird::draw(sf::RenderWindow &window) { window.draw(this->sprite); }

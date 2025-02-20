@@ -12,6 +12,7 @@
 void game_loop() {
   sf::RenderWindow window(sf::VideoMode({1024, 700}), "Flappy Bird",
                           sf::Style::Close | sf::Style::Titlebar);
+  // Setting Up Background
   sf::Texture background_texture;
   if (!background_texture.loadFromFile(
           "assets/tappyplane/PNG/background.png")) {
@@ -26,19 +27,21 @@ void game_loop() {
   background_sprite.setScale({float(window_size.x) / background_bounds.size.x,
                               float(window_size.y) / background_bounds.size.y});
 
+  // Setting Up the Bird
   sf::Texture bird_texture;
   if (!bird_texture.loadFromFile("assets/tappyplane/Spritesheet/planes.png")) {
     std::cerr << "Error loading bird texture!" << std::endl;
   }
 
-  Bird bird(212.f, 100.f, 10, -15, bird_texture);
-  bird.apply_force(GRAVITY);
+  Bird bird(212.f, 100.f, 10, -50, bird_texture);
 
+  // Setting Up Pipes
   sf::Texture pipe_texture;
-  if (!pipe_texture.loadFromFile("assets/images/pipe2.png")) {
+  if (!pipe_texture.loadFromFile("assets/tappyplane/Spritesheet/sheet.png")) {
     std::cerr << "Error loading pipe texture!" << std::endl;
   }
 
+  // Generating Initial Pipes
   std::mt19937 rng(std::random_device{}());
   std::uniform_int_distribution<int> gap_heit_dist(200, 500);
   float pipe_spacing = 200;
@@ -46,28 +49,14 @@ void game_loop() {
   for (int i = 0; i < 7; i++) {
     float gap_position = gap_heit_dist(rng);
     pipes.push_back(Pipe(window.getSize().x + i * pipe_spacing, gap_position,
-                         250, 0.0001, pipe_texture));
+                         250, 100, pipe_texture));
   }
 
   sf::Clock clock;
   while (window.isOpen()) {
-    float time = clock.restart().asMicroseconds();
-    bird.update_sprite(time / 50000);
-    if (!pipes.empty() && pipes.front().is_off_screen()) {
-      float last_pipe_x = pipes.back().get_upper_bounds().position.x;
-      pipes.erase(pipes.begin());
-      float gap_position = gap_heit_dist(rng);
-      pipes.push_back(Pipe(last_pipe_x + pipe_spacing, gap_position, 250,
-                           0.0001, pipe_texture));
-    }
-    for (auto &pipe : pipes) {
-      pipe.update(time);
-      if (bird.is_collided(window, pipe)) {
+    float time = clock.restart().asSeconds();
 
-        std::cout << "Collision detected!" << std::endl;
-        // exit(-1);
-      }
-    }
+    // Event handling
     bool spaceWasPressed = false;
     while (const std::optional event = window.pollEvent()) {
       bool spaceIsPressed =
@@ -80,6 +69,26 @@ void game_loop() {
         window.close();
       }
     }
+
+    // Update
+    bird.update_sprite(20 * time);
+    if (!pipes.empty() && pipes.front().is_off_screen()) {
+      float last_pipe_x = pipes.back().get_upper_bounds().position.x;
+      pipes.erase(pipes.begin());
+      float gap_position = gap_heit_dist(rng);
+      pipes.push_back(Pipe(last_pipe_x + pipe_spacing, gap_position, 250, 100,
+                           pipe_texture));
+    }
+    for (auto &pipe : pipes) {
+      pipe.update(time);
+      // if (bird.is_collided(window, pipe)) {
+      //
+      //   std::cout << "Collision detected!" << std::endl;
+      //   // exit(-1);
+      // }
+    }
+
+    // Draw & Display
     window.clear(sf::Color::Black);
     window.draw(background_sprite);
     bird.draw(window);
