@@ -6,29 +6,20 @@ Pipe::Pipe(float inital_position, float gap_position, float gap_size,
            float speed, const sf::Texture &texture)
     : lower_pipe(texture), upper_pipe(texture) {
   this->lower_pipe.setTexture(texture);
+  // this->lower_pipe.setTextureRect(sf::IntRect({108, 1757}, {108, 239}));
+  //<SubTexture name="elementExplosive020.png" x="710" y="510" width="70"
+  // height="220"/>
+
+  this->lower_pipe.setTextureRect(sf::IntRect({710, 510}, {70, 220}));
   this->upper_pipe.setTexture(texture);
+  this->upper_pipe.setTextureRect(sf::IntRect({710, 510}, {70, 220}));
   this->inital_position = inital_position;
   this->gap_position = gap_position;
   this->gap_size = gap_size;
   this->speed = speed;
 
-  sf::IntRect pipe_rect({0, 0}, {300, 700});
-  this->lower_pipe.setTextureRect(pipe_rect);
-  this->upper_pipe.setTextureRect(pipe_rect);
-
-  sf::Vector2u texture_size = texture.getSize();
-
-  // float scale_x =
-  //     static_cast<float>(pipe_rect.size.x) /
-  //     static_cast<float>(texture_size.x);
-  // float scale_y =
-  //     static_cast<float>(pipe_rect.size.y) /
-  //     static_cast<float>(texture_size.y);
-  //
-  // this->lower_pipe.setScale({scale_x, scale_y});
-  // this->upper_pipe.setScale({scale_x, -scale_y});
-  this->lower_pipe.setScale({1.f, 1.f});
-  this->upper_pipe.setScale({1.f, -1.f});
+  this->lower_pipe.setScale({1.2f, 2.f});
+  this->upper_pipe.setScale({1.2f, -2.f});
 
   this->upper_pipe.setPosition({inital_position, gap_position});
   this->lower_pipe.setPosition({inital_position, gap_position + gap_size});
