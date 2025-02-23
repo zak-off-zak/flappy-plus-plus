@@ -46,7 +46,7 @@ void game_loop() {
   // Generating Initial Pipes
   std::mt19937 rng(std::random_device{}());
   std::uniform_int_distribution<int> gap_position_dist(200, 400);
-  std::uniform_int_distribution<int> gap_size_dist(200, 300);
+  std::uniform_int_distribution<int> gap_size_dist(300, 400);
   float pipe_spacing = 400;
   std::vector<Pipe> pipes;
   for (int i = 0; i < 7; i++) {
@@ -55,6 +55,8 @@ void game_loop() {
     pipes.push_back(Pipe(window.getSize().x + i * pipe_spacing, gap_position,
                          gap_size, 100, pipe_texture));
   }
+
+  bool breaked = false;
 
   sf::Clock clock;
   while (window.isOpen()) {
@@ -75,25 +77,29 @@ void game_loop() {
     }
 
     // Update
-    bird.update_sprite(20 * time);
-    if (!pipes.empty() && pipes.front().is_off_screen()) {
-      // Delete the unneeded pipe
-      float last_pipe_x = pipes.back().get_upper_bounds().position.x;
-      pipes.erase(pipes.begin());
+    if (!breaked) {
 
-      // Generate new pipe
-      float gap_position = gap_position_dist(rng);
-      float gap_size = gap_size_dist(rng);
-      pipes.push_back(Pipe(last_pipe_x + pipe_spacing, gap_position, gap_size,
-                           100, pipe_texture));
-    }
-    for (auto &pipe : pipes) {
-      pipe.update(time);
-      // if (bird.is_collided(window, pipe)) {
-      //
-      //   std::cout << "Collision detected!" << std::endl;
-      //   // exit(-1);
-      // }
+      bird.update_sprite(20 * time);
+      if (!pipes.empty() && pipes.front().is_off_screen()) {
+        // Delete the unneeded pipe
+        float last_pipe_x = pipes.back().get_upper_bounds().position.x;
+        pipes.erase(pipes.begin());
+
+        // Generate new pipe
+        float gap_position = gap_position_dist(rng);
+        float gap_size = gap_size_dist(rng);
+        pipes.push_back(Pipe(last_pipe_x + pipe_spacing, gap_position, gap_size,
+                             100, pipe_texture));
+      }
+      for (auto &pipe : pipes) {
+        pipe.update(time);
+        if (bird.is_collided(window, pipe)) {
+
+          std::cout << "Collision detected!" << std::endl;
+          breaked = true;
+          break;
+        }
+      }
     }
 
     // Draw & Display
