@@ -10,12 +10,12 @@
 #include <vector>
 
 void game_loop() {
-  sf::RenderWindow window(sf::VideoMode({1024, 700}), "Flappy Bird",
+  sf::RenderWindow window(sf::VideoMode({1200, 600}), "Flappy Bird",
                           sf::Style::Close | sf::Style::Titlebar);
   // Setting Up Background
   sf::Texture background_texture;
   if (!background_texture.loadFromFile(
-          "assets/tappyplane/PNG/background.png")) {
+          "assets/kenney_physics-assets/PNG/Backgrounds/blue_desert.png")) {
     std::cerr << "Error loading background texture!" << std::endl;
   }
 
@@ -29,7 +29,8 @@ void game_loop() {
 
   // Setting Up the Bird
   sf::Texture bird_texture;
-  if (!bird_texture.loadFromFile("assets/tappyplane/Spritesheet/planes.png")) {
+  if (!bird_texture.loadFromFile("assets/kenney_physics-assets/Spritesheet/"
+                                 "spritesheet_aliens.png")) {
     std::cerr << "Error loading bird texture!" << std::endl;
   }
 
@@ -37,19 +38,22 @@ void game_loop() {
 
   // Setting Up Pipes
   sf::Texture pipe_texture;
-  if (!pipe_texture.loadFromFile("assets/tappyplane/Spritesheet/sheet.png")) {
+  if (!pipe_texture.loadFromFile("assets/kenney_physics-assets/Spritesheet/"
+                                 "spritesheet_explosive.png")) {
     std::cerr << "Error loading pipe texture!" << std::endl;
   }
 
   // Generating Initial Pipes
   std::mt19937 rng(std::random_device{}());
-  std::uniform_int_distribution<int> gap_heit_dist(200, 500);
-  float pipe_spacing = 200;
+  std::uniform_int_distribution<int> gap_position_dist(200, 400);
+  std::uniform_int_distribution<int> gap_size_dist(200, 300);
+  float pipe_spacing = 400;
   std::vector<Pipe> pipes;
   for (int i = 0; i < 7; i++) {
-    float gap_position = gap_heit_dist(rng);
+    float gap_position = gap_position_dist(rng);
+    float gap_size = gap_size_dist(rng);
     pipes.push_back(Pipe(window.getSize().x + i * pipe_spacing, gap_position,
-                         250, 100, pipe_texture));
+                         gap_size, 100, pipe_texture));
   }
 
   sf::Clock clock;
@@ -73,11 +77,15 @@ void game_loop() {
     // Update
     bird.update_sprite(20 * time);
     if (!pipes.empty() && pipes.front().is_off_screen()) {
+      // Delete the unneeded pipe
       float last_pipe_x = pipes.back().get_upper_bounds().position.x;
       pipes.erase(pipes.begin());
-      float gap_position = gap_heit_dist(rng);
-      pipes.push_back(Pipe(last_pipe_x + pipe_spacing, gap_position, 250, 100,
-                           pipe_texture));
+
+      // Generate new pipe
+      float gap_position = gap_position_dist(rng);
+      float gap_size = gap_size_dist(rng);
+      pipes.push_back(Pipe(last_pipe_x + pipe_spacing, gap_position, gap_size,
+                           100, pipe_texture));
     }
     for (auto &pipe : pipes) {
       pipe.update(time);
