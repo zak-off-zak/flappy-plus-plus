@@ -14,7 +14,7 @@ public:
 
   void draw(sf::RenderWindow &window);
   void update_sprite(float time);
-  void flap(float &time, sf::RenderWindow &window);
+  void flap(sf::RenderWindow &window);
   sf::FloatRect getBounds() const;
   bool is_collided(sf::RenderWindow &window, Pipe &pipe);
 
