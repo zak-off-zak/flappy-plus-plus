@@ -1,4 +1,5 @@
 #include "../include/Game.h"
+#include "../include/MenuState.h"
 #include "../include/PlayState.h"
 #include <SFML/Graphics/Sprite.hpp>
 #include <iostream>
@@ -6,7 +7,7 @@
 
 PlayState::PlayState()
     : bird(212.f, 100.f, 10, -50, sf::Texture()), background_texture(),
-      background_sprite(this->background_texture){}
+      background_sprite(this->background_texture) {}
 
 void PlayState::init(Game *game) {
   this->game_over = false;
@@ -58,6 +59,9 @@ void PlayState::handle_input(Game *game,
                              const std::optional<sf::Event> &event) {
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
     bird.flap(game->get_window());
+  }
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
+    game->push_state(std::make_unique<MenuState>());
   }
   if (event->is<sf::Event::Closed>()) {
     game->get_window().close();

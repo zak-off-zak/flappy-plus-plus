@@ -1,5 +1,6 @@
 #include "../include/GameLoop.h"
 #include "../include/Game.h"
+#include "../include/MenuState.h"
 #include "../include/PlayState.h"
 #include <memory>
 

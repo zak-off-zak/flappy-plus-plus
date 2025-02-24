@@ -5,9 +5,10 @@
 #include "GameState.h"
 #include <random>
 #include <vector>
+
 class PlayState : public GameState {
 public:
-PlayState();
+  PlayState();
   void init(Game *game) override;
   void handle_input(Game *game, const std::optional<sf::Event> &event) override;
   void update(Game *game, float time) override;

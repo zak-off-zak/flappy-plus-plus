@@ -1,8 +1,11 @@
 #include "../include/Game.h"
+#include <iostream>
 
 void Game::push_state(std::unique_ptr<GameState> state) {
+  std::cout << "1" << std::endl;
   state->init(this);
   this->states.push(std::move(state));
+  std::cout << "2" << std::endl;
 }
 
 void Game::pop_state() {
