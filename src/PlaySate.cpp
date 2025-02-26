@@ -7,7 +7,7 @@
 #include <random>
 
 PlayState::PlayState()
-    : bird(212.f, 100.f, 10, -50, sf::Texture()), background_texture(),
+    : bird(212.f, 200.f, 10, -50, sf::Texture()), background_texture(),
       background_sprite(this->background_texture), score_text(this->ui_font) {}
 
 void PlayState::init(Game *game) {
@@ -42,7 +42,7 @@ void PlayState::init(Game *game) {
     std::cerr << "Error loading bird texture!" << std::endl;
   }
 
-  this->bird = Bird(212.f, 100.f, 10, -50, this->bird_texture);
+  this->bird = Bird(212.f, 200.f, 10, -50, this->bird_texture);
 
   // Setting Up Pipes
   if (!this->pipe_texture.loadFromFile(
