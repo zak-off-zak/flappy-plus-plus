@@ -3,6 +3,8 @@
 
 #include "Bird.h"
 #include "GameState.h"
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include <random>
 #include <vector>
 
@@ -16,7 +18,6 @@ public:
 
 protected:
 private:
-  bool game_over;
   Bird bird;
   std::vector<Pipe> pipes;
   float pipe_spacing;
@@ -27,6 +28,8 @@ private:
   sf::Sprite background_sprite;
   sf::Texture bird_texture;
   sf::Texture pipe_texture;
+  sf::Font ui_font;
+  sf::Text score_text;
 };
 
 #endif // !PLAY_STATE

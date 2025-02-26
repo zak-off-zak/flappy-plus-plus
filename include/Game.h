@@ -8,9 +8,11 @@
 
 class Game {
 public:
-  Game()
-      : window(sf::VideoMode({1200, 600}), "Flappy Bird",
-               sf::Style::Close | sf::Style::Titlebar) {}
+  bool game_over;
+  long long score;
+  long long poped_pipes;
+
+  Game();
 
   void push_state(std::unique_ptr<GameState> state);
   void pop_state();

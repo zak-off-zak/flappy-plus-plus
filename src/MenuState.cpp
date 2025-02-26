@@ -58,8 +58,7 @@ void MenuState::init(Game *game) {
 
   // Setting the score text
   this->score_text.setFont(this->ui_font);
-  // TODO:: Implement the score counting
-  this->score_text.setString("Score: ");
+  this->score_text.setString("Score: " + std::to_string(game->score));
   this->score_text.setCharacterSize(40);
   this->score_text.setPosition({(this->rectangle.getPosition().x +
                                  (this->rectangle.getLocalBounds().size.x -
