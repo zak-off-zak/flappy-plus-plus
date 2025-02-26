@@ -63,9 +63,6 @@ void PlayState::handle_input(Game *game,
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
     game->push_state(std::make_unique<MenuState>());
   }
-  if (event->is<sf::Event::Closed>()) {
-    game->get_window().close();
-  }
 }
 
 void PlayState::update(Game *game, float time) {
@@ -95,7 +92,6 @@ void PlayState::update(Game *game, float time) {
 }
 
 void PlayState::render(Game *game, sf::RenderWindow &window) {
-  window.clear(sf::Color::Black);
   window.draw(background_sprite);
   bird.draw(window);
   for (auto &pipe : pipes) {

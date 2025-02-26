@@ -7,5 +7,6 @@
 void game_loop() {
   Game game;
   game.push_state(std::make_unique<PlayState>());
+  game.push_state(std::make_unique<MenuState>());
   game.run();
 }

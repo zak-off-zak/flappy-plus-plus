@@ -2,10 +2,8 @@
 #include <iostream>
 
 void Game::push_state(std::unique_ptr<GameState> state) {
-  std::cout << "1" << std::endl;
   state->init(this);
   this->states.push(std::move(state));
-  std::cout << "2" << std::endl;
 }
 
 void Game::pop_state() {
@@ -33,16 +31,19 @@ void Game::run() {
         this->window.close();
       }
 
-      if (this->get_current_state())
+      if (this->get_current_state()) {
         this->get_current_state()->handle_input(this, event);
+      }
     }
 
-    if (this->get_current_state())
+    if (this->get_current_state()) {
       this->get_current_state()->update(this, time);
+    }
 
     this->window.clear();
-    if (this->get_current_state())
+    if (this->get_current_state()) {
       this->get_current_state()->render(this, this->window);
+    }
     this->window.display();
   }
 }
