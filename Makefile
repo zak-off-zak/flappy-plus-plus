@@ -1,5 +1,6 @@
 BUILD_DIR := build
 EXECUTABLE := $(BUILD_DIR)/bin/main
+ASSETS_DIR := assets
 
 all: build run
 
@@ -13,14 +14,17 @@ debug_conf:
 build: configure
 	@echo "[BUILD LOGS]: Building using CMake"
 	cmake --build $(BUILD_DIR)
+	cp -r $(ASSETS_DIR) ~
 
 run: build
 	@echo "[BUILD LOGS]: Running main"
 	@$(EXECUTABLE)
 
+wipe_assets:
+	rm -rf  ~/$(ASSETS_DIR)
 
-clean:
+clean: wipe_assets
 	@echo "[BUILD LOGS]: Cleaning build directory"
 	rm -rf $(BUILD_DIR)
 
-.PHONY: all configure build run clean
+.PHONY: all configure build run clean wipe_assets debug_conf
