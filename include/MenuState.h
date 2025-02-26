@@ -30,6 +30,7 @@ private:
   sf::Text resume_button_text;
   sf::RectangleShape restart_button;
   sf::Text restart_button_text;
+  sf::Text score_text;
   // CustomButton resume_button;
 };
 

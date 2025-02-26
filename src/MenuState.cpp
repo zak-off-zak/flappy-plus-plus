@@ -10,7 +10,7 @@
 MenuState::MenuState()
     : background_texture(), background_sprite(this->background_texture),
       menu_text(this->ui_font), resume_button_text(this->ui_font),
-      restart_button_text(this->ui_font) {}
+      restart_button_text(this->ui_font), score_text(this->ui_font) {}
 
 void MenuState::init(Game *game) {
   // Setting Up Background
@@ -42,19 +42,32 @@ void MenuState::init(Game *game) {
       {float(window_size.x - this->rectangle.getSize().x) / 2.f,
        float(window_size.y - this->rectangle.getSize().y) / 2.f});
 
-  // Setting text
+  // Setting the header
   if (!this->ui_font.openFromFile(
           "assets/kenney_ui-pack/Font/Kenney Future.ttf")) {
     std::cerr << "Error loading ui font!" << std::endl;
   }
   this->menu_text.setFont(this->ui_font);
   this->menu_text.setString("Menu");
-  this->menu_text.setCharacterSize(60);
-  this->menu_text.setPosition(
-      {float(window_size.x - this->rectangle.getSize().x) / 2.f +
-           this->menu_text.getLocalBounds().size.x / 2.f,
-       float(window_size.y - this->rectangle.getSize().y) / 2.f +
-           this->menu_text.getLocalBounds().size.y / 2.f});
+  this->menu_text.setCharacterSize(80);
+  this->menu_text.setPosition({(this->rectangle.getPosition().x +
+                                (this->rectangle.getLocalBounds().size.x -
+                                 this->menu_text.getLocalBounds().size.x) /
+                                    2.f),
+                               (this->rectangle.getPosition().y)});
+
+  // Setting the score text
+  this->score_text.setFont(this->ui_font);
+  // TODO:: Implement the score counting
+  this->score_text.setString("Score: ");
+  this->score_text.setCharacterSize(40);
+  this->score_text.setPosition({(this->rectangle.getPosition().x +
+                                 (this->rectangle.getLocalBounds().size.x -
+                                  this->score_text.getLocalBounds().size.x) /
+                                     2.f),
+                                (this->rectangle.getPosition().y +
+                                 this->rectangle.getLocalBounds().size.y / 2.f -
+                                 this->score_text.getLocalBounds().size.y)});
 
   // Creating buttons
   // this->resume_button =
@@ -125,5 +138,6 @@ void MenuState::render(Game *game, sf::RenderWindow &window) {
   window.draw(this->resume_button_text);
   window.draw(this->restart_button);
   window.draw(this->restart_button_text);
+  window.draw(this->score_text);
   // window.draw(this->menu_background_sprite);
 }
