@@ -79,7 +79,7 @@ void PlayState::update(Game *game, float time) {
       pipes.push_back(Pipe(last_pipe_x + pipe_spacing, gap_position, gap_size,
                            100, pipe_texture));
     }
-    for (auto &pipe : pipes) {
+    for (Pipe &pipe : pipes) {
       pipe.update(time);
       if (bird.is_collided(game->get_window(), pipe)) {
 
@@ -94,7 +94,7 @@ void PlayState::update(Game *game, float time) {
 void PlayState::render(Game *game, sf::RenderWindow &window) {
   window.draw(background_sprite);
   bird.draw(window);
-  for (auto &pipe : pipes) {
+  for (Pipe &pipe : pipes) {
     pipe.draw(window);
   }
 }
