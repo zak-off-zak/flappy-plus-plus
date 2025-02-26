@@ -28,6 +28,8 @@ private:
   sf::Text menu_text;
   sf::RectangleShape resume_button;
   sf::Text resume_button_text;
+  sf::RectangleShape restart_button;
+  sf::Text restart_button_text;
   // CustomButton resume_button;
 };
 

@@ -1,6 +1,6 @@
 #include "../include/MenuState.h"
 #include "../include/Game.h"
-#include "../include/Utilities.h"
+#include "../include/PlayState.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -9,7 +9,8 @@
 
 MenuState::MenuState()
     : background_texture(), background_sprite(this->background_texture),
-      menu_text(this->ui_font), resume_button_text(this->ui_font) {}
+      menu_text(this->ui_font), resume_button_text(this->ui_font),
+      restart_button_text(this->ui_font) {}
 
 void MenuState::init(Game *game) {
   // Setting Up Background
@@ -59,6 +60,7 @@ void MenuState::init(Game *game) {
   // this->resume_button =
   //     CustomButton({300.f, 300.f}, {100.f, 100.f}, resume_button_shape,
   //                  sf::Color::Black, [game]() { game->pop_state(); });
+  //                  Resume button
   this->resume_button = sf::RectangleShape({150, 50});
   this->resume_button.setFillColor(sf::Color(61, 186, 77));
   this->resume_button.setPosition(
@@ -74,6 +76,22 @@ void MenuState::init(Game *game) {
             2.f),
        this->resume_button.getPosition().y +
            this->resume_button_text.getLocalBounds().size.y / 2.f});
+  //                  Restart button
+  this->restart_button = sf::RectangleShape({150, 50});
+  this->restart_button.setFillColor(sf::Color(199, 57, 53));
+  this->restart_button.setPosition(
+      {float(window_size.x - this->restart_button.getSize().x) / 2.f + 100,
+       float(window_size.y - this->restart_button.getSize().y) / 2.f + 100});
+  this->restart_button_text.setFont(this->ui_font);
+  this->restart_button_text.setString("Restart");
+  this->restart_button_text.setCharacterSize(25);
+  this->restart_button_text.setPosition(
+      {this->restart_button.getPosition().x +
+           ((this->restart_button.getLocalBounds().size.x -
+             this->restart_button_text.getLocalBounds().size.x) /
+            2.f),
+       this->restart_button.getPosition().y +
+           this->restart_button_text.getLocalBounds().size.y / 2.f});
 }
 
 void MenuState::handle_input(Game *game,
@@ -88,6 +106,11 @@ void MenuState::handle_input(Game *game,
     if (this->resume_button.getGlobalBounds().contains(mouse_position)) {
       game->pop_state();
     }
+    if (this->restart_button.getGlobalBounds().contains(mouse_position)) {
+      game->pop_state();
+      game->pop_state();
+      game->push_state(std::make_unique<PlayState>());
+    }
   }
 }
 
@@ -100,5 +123,7 @@ void MenuState::render(Game *game, sf::RenderWindow &window) {
   window.draw(this->menu_text);
   window.draw(this->resume_button);
   window.draw(this->resume_button_text);
+  window.draw(this->restart_button);
+  window.draw(this->restart_button_text);
   // window.draw(this->menu_background_sprite);
 }
