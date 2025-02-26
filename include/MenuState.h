@@ -1,7 +1,6 @@
 #ifndef MENU_STATE
 #define MENU_STATE
 
-#include "CustomButton.h"
 #include "GameState.h"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>

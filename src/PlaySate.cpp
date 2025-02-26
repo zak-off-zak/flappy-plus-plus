@@ -1,16 +1,20 @@
 #include "../include/Game.h"
 #include "../include/MenuState.h"
 #include "../include/PlayState.h"
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <iostream>
 #include <random>
 
 PlayState::PlayState()
     : bird(212.f, 100.f, 10, -50, sf::Texture()), background_texture(),
-      background_sprite(this->background_texture) {}
+      background_sprite(this->background_texture), score_text(this->ui_font) {}
 
 void PlayState::init(Game *game) {
-  this->game_over = false;
+  game->game_over = false;
+  game->score = 0;
+  game->poped_pipes = 0;
+
   this->rng = std::mt19937(std::random_device{}());
   this->gap_position_dist = std::uniform_int_distribution<int>(200, 400);
   this->gap_size_dist = std::uniform_int_distribution<int>(300, 400);
@@ -53,6 +57,19 @@ void PlayState::init(Game *game) {
     pipes.push_back(Pipe(game->get_window().getSize().x + i * pipe_spacing,
                          gap_position, gap_size, 100, pipe_texture));
   }
+
+  if (!this->ui_font.openFromFile(
+          "assets/kenney_ui-pack/Font/Kenney Future.ttf")) {
+    std::cerr << "Error loading ui font!" << std::endl;
+  }
+  this->score_text.setFont(this->ui_font);
+  this->score_text.setString("Score: " + std::to_string(game->score));
+  this->score_text.setCharacterSize(40);
+  this->score_text.setFillColor(sf::Color(241, 156, 183));
+  this->score_text.setPosition({(game->get_window().getSize().x -
+                                 this->score_text.getLocalBounds().size.x) /
+                                    2.f,
+                                30});
 }
 
 void PlayState::handle_input(Game *game,
@@ -66,12 +83,13 @@ void PlayState::handle_input(Game *game,
 }
 
 void PlayState::update(Game *game, float time) {
-  if (!game_over) {
+  if (!game->game_over) {
     this->bird.update_sprite(20 * time);
     if (!this->pipes.empty() && this->pipes.front().is_off_screen()) {
       // Delete the unneeded pipe
       float last_pipe_x = this->pipes.back().get_upper_bounds().position.x;
       this->pipes.erase(this->pipes.begin());
+      game->poped_pipes++;
 
       // Generate new pipe
       float gap_position = this->gap_position_dist(rng);
@@ -79,12 +97,21 @@ void PlayState::update(Game *game, float time) {
       pipes.push_back(Pipe(last_pipe_x + pipe_spacing, gap_position, gap_size,
                            100, pipe_texture));
     }
+    if (this->pipes[game->score - game->poped_pipes]
+                .get_upper_bounds()
+                .position.x +
+            this->pipes[game->score - game->poped_pipes]
+                .get_upper_bounds()
+                .size.x <
+        bird.getBounds().position.x) {
+      game->score++;
+      this->score_text.setString("Score: " + std::to_string(game->score));
+    }
     for (Pipe &pipe : pipes) {
       pipe.update(time);
       if (bird.is_collided(game->get_window(), pipe)) {
-
-        std::cout << "Collision detected!" << std::endl;
-        this->game_over = true;
+        game->game_over = true;
+        game->push_state(std::make_unique<MenuState>());
         break;
       }
     }
@@ -97,4 +124,5 @@ void PlayState::render(Game *game, sf::RenderWindow &window) {
   for (Pipe &pipe : pipes) {
     pipe.draw(window);
   }
+  window.draw(this->score_text);
 }

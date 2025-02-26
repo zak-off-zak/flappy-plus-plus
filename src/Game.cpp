@@ -1,5 +1,13 @@
 #include "../include/Game.h"
 
+Game::Game()
+    : window(sf::VideoMode({1200, 600}), "Flappy Bird",
+             sf::Style::Close | sf::Style::Titlebar) {
+  this->score = 0;
+  this->poped_pipes = 0;
+  this->game_over = false;
+}
+
 void Game::push_state(std::unique_ptr<GameState> state) {
   state->init(this);
   this->states.push(std::move(state));
