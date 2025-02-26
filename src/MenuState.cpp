@@ -48,8 +48,13 @@ void MenuState::init(Game *game) {
     std::cerr << "Error loading ui font!" << std::endl;
   }
   this->menu_text.setFont(this->ui_font);
-  this->menu_text.setString("Menu");
-  this->menu_text.setCharacterSize(80);
+  if (game->game_over) {
+    this->menu_text.setString("Game Over");
+    this->menu_text.setCharacterSize(55);
+  } else {
+    this->menu_text.setString("Menu");
+    this->menu_text.setCharacterSize(80);
+  }
   this->menu_text.setPosition({(this->rectangle.getPosition().x +
                                 (this->rectangle.getLocalBounds().size.x -
                                  this->menu_text.getLocalBounds().size.x) /
@@ -88,12 +93,19 @@ void MenuState::init(Game *game) {
             2.f),
        this->resume_button.getPosition().y +
            this->resume_button_text.getLocalBounds().size.y / 2.f});
+
   //                  Restart button
   this->restart_button = sf::RectangleShape({150, 50});
   this->restart_button.setFillColor(sf::Color(199, 57, 53));
-  this->restart_button.setPosition(
-      {float(window_size.x - this->restart_button.getSize().x) / 2.f + 100,
-       float(window_size.y - this->restart_button.getSize().y) / 2.f + 100});
+  if (!game->game_over) {
+    this->restart_button.setPosition(
+        {float(window_size.x - this->restart_button.getSize().x) / 2.f + 100,
+         float(window_size.y - this->restart_button.getSize().y) / 2.f + 100});
+  } else {
+    this->restart_button.setPosition(
+        {float(window_size.x - this->restart_button.getSize().x) / 2.f,
+         float(window_size.y - this->restart_button.getSize().y) / 2.f + 100});
+  }
   this->restart_button_text.setFont(this->ui_font);
   this->restart_button_text.setString("Restart");
   this->restart_button_text.setCharacterSize(25);
@@ -133,8 +145,10 @@ void MenuState::render(Game *game, sf::RenderWindow &window) {
   window.draw(this->overlay);
   window.draw(this->rectangle);
   window.draw(this->menu_text);
-  window.draw(this->resume_button);
-  window.draw(this->resume_button_text);
+  if (!game->game_over) {
+    window.draw(this->resume_button);
+    window.draw(this->resume_button_text);
+  }
   window.draw(this->restart_button);
   window.draw(this->restart_button_text);
   window.draw(this->score_text);
