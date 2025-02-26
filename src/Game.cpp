@@ -1,5 +1,4 @@
 #include "../include/Game.h"
-#include <iostream>
 
 void Game::push_state(std::unique_ptr<GameState> state) {
   state->init(this);
