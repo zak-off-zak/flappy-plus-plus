@@ -17,11 +17,11 @@ public:
   /**
    * @brief Bids constructor
    *
-   * @param x birtds initial position along x-axis
-   * @param y birtds initial position along y-axis
-   * @param mass mass of the bird
-   * @param falp_strength how strong shall the bird flap
-   * @param texture texture for the birds sprite
+   * @param x Birtds initial position along x-axis
+   * @param y Birtds initial position along y-axis
+   * @param mass Mass of the bird
+   * @param falp_strength How strong shall the bird flap
+   * @param texture Texture for the birds sprite
    */
   Bird(float x, float y, float mass, float falp_strength,
        const sf::Texture &texture);
