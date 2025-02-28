@@ -7,7 +7,7 @@
 
 /**
  * @class Pipe
- * @brief The class containing all of the information about the pipe object
+ * @brief Class containing all of the information about the pipe object
  *
  */
 class Pipe {
