@@ -5,11 +5,8 @@
 Pipe::Pipe(float inital_position, float gap_position, float gap_size,
            float speed, const sf::Texture &texture)
     : lower_pipe(texture), upper_pipe(texture) {
+  // Set all of the attributes
   this->lower_pipe.setTexture(texture);
-  // this->lower_pipe.setTextureRect(sf::IntRect({108, 1757}, {108, 239}));
-  //<SubTexture name="elementExplosive020.png" x="710" y="510" width="70"
-  // height="220"/>
-
   this->lower_pipe.setTextureRect(sf::IntRect({710, 510}, {70, 220}));
   this->upper_pipe.setTexture(texture);
   this->upper_pipe.setTextureRect(sf::IntRect({710, 510}, {70, 220}));
@@ -19,8 +16,10 @@ Pipe::Pipe(float inital_position, float gap_position, float gap_size,
   this->speed = speed;
 
   this->lower_pipe.setScale({1.2f, 2.f});
+  // Flip the upper pipe to make it easier to work with is position
   this->upper_pipe.setScale({1.2f, -2.f});
 
+  // Set the position op the lower and upper pipes
   this->upper_pipe.setPosition({inital_position, gap_position});
   this->lower_pipe.setPosition({inital_position, gap_position + gap_size});
 }
@@ -39,12 +38,14 @@ sf::FloatRect Pipe::get_lower_bounds() const {
 }
 
 bool Pipe::is_off_screen() const {
+  // Check if the pipe steel can be seen on the screen
   return (this->upper_pipe.getPosition().x +
               this->upper_pipe.getGlobalBounds().size.x <
           0);
 }
 
 void Pipe::update(float time) {
+  // Move pipes to the right with a specific speed
   this->upper_pipe.move({-this->speed * time, 0.f});
   this->lower_pipe.move({-this->speed * time, 0.f});
 }
