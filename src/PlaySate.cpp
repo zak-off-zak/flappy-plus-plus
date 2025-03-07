@@ -45,7 +45,7 @@ void PlayState::init(Game *game) {
     std::cerr << "Error loading bird texture!" << std::endl;
   }
 
-  this->bird = Bird(212.f, 200.f, 10, -50, this->bird_texture);
+  this->bird = Bird(212.f, 150.f, 10, -50, this->bird_texture);
 
   // Setting Up Pipes
   if (!this->pipe_texture.loadFromFile(
