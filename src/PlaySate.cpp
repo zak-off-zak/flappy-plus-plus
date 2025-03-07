@@ -87,7 +87,9 @@ void PlayState::handle_input(Game *game,
   // Push the menu state to the stack to switch to menu without loosing the
   // progress, when the escape key is hit
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
-    game->push_state(std::make_unique<MenuState>());
+    if (!game->game_over) {
+      game->push_state(std::make_unique<MenuState>());
+    }
   }
 }
 
@@ -95,7 +97,7 @@ void PlayState::update(Game *game, float time) {
   // Update only if the player has not lost yet
   if (!game->game_over) {
     // Update the bird
-    this->bird.update_sprite(20 * time);
+    this->bird.update(20 * time);
 
     // Update the pipes
     if (!this->pipes.empty() && this->pipes.front().is_off_screen()) {
