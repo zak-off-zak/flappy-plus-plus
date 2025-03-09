@@ -69,26 +69,12 @@ public:
   void apply_force(sf::Vector2<float> force);
 
   /**
-   * @brief Return the current velocity of an object
-   *
-   * @param time A point of time relative to what the velocity shall be
-   * determined
-   */
-  sf::Vector2<float> get_velocity(float time);
-  /**
-   * @brief Return the current position of an object
-   *
-   * @param time A point of time relative to what the position shall be
-   * determined
-   */
-  sf::Vector2<float> get_position(float time);
-  /**
-   * @brief Upates the current position, velocity and acceleration of an object
+   * @brief Upates the current position and velocity of an object
    * based on the time
    *
    * @param time Time to calculate the new position, velocity and acceleration
    */
-  void update(float time);
+  void update_object(float time);
 
 protected:
 private:

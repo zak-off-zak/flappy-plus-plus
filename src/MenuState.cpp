@@ -132,7 +132,10 @@ void MenuState::handle_input(Game *game,
   // Pop the menu state when the escape key is pressed -> return to the palying
   // state
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
-    game->pop_state();
+    if (!game->game_over) {
+
+      game->pop_state();
+    }
   }
   // Check if the lef button of the mouse if pressed
   if (event->is<sf::Event::MouseButtonPressed>() &&

@@ -19,13 +19,13 @@ Bird::Bird(float x, float y, float mass, float falp_strength,
 
 void Bird::draw(sf::RenderWindow &window) { window.draw(this->sprite); }
 
-void Bird::update_sprite(float time) {
+void Bird::update(float time) {
   // Update the birds objects postion and then update its sprite
-  this->update(time);
+  this->update_object(time);
   this->sprite.setPosition(this->position);
 }
 
-void Bird::flap(sf::RenderWindow &window) {
+void Bird::flap() {
   // Push the bird upwards by setting the y-component of the birds velocity to
   // the flap strength
   this->set_velocity(this->velocity.x, this->falp_strength);

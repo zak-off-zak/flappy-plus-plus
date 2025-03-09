@@ -22,7 +22,7 @@ void Object::set_position(float x, float y) {
 
 void Object::set_velocity(float x, float y) {
   // Clip the velocity in order to prevent the object from accelerating
-  // indeginitely
+  // indefinitely
   this->velocity.x = std::min(x, 30.0f);
   this->velocity.y = std::min(y, 30.0f);
 }
@@ -39,40 +39,19 @@ void Object::apply_force(sf::Vector2<float> force) {
                    this->acceleration.y + force.y / this->mass);
 }
 
-sf::Vector2<float> Object::get_velocity(float time) {
-  // Calculate the new velocity by using the equation: V = V_0 + a*t (V := new
-  // velocity, V_0 := initial velocity, a : = acceleration, t := time)
-  sf::Vector2<float> return_velocity;
-  return_velocity.x = this->velocity.x + this->acceleration.x * time;
-  return_velocity.y = this->velocity.y + this->acceleration.y * time;
-  return return_velocity;
-}
-
-sf::Vector2<float> Object::get_position(float time) {
-  // Calculate the postion by using the equation: x = x_0 + v*t + (a*t^2)/2 (x
-  // := new position, x_0 := initial position, v : = current velocity, t :=
-  // time, a
-  // := acceleration")
-  sf::Vector2<float> return_position;
-  return_position.x = this->position.x + this->velocity.x * time +
-                      this->acceleration.x * (time * time) / 2;
-  return_position.y = this->position.y + this->velocity.y * time +
-                      this->acceleration.y * (time * time) / 2;
-  return return_position;
-}
-
-void Object::update(float time) {
+void Object::update_object(float time) {
   // Calculate new velocity using the equation: v += a * t (v := velocity, a :=
   // acceleration, t := time)
   this->set_velocity(this->velocity.x += this->acceleration.x * time,
                      this->velocity.y += this->acceleration.y * time);
 
-  // Calculate the postion by using the equation: x = x_0 + v*t + (a*t^2)/2 (x
+  // Calculate the postion by using the equation: x +=  v*t + (a*t^2)/2 (x
   // := new position, x_0 := initial position, v : = current velocity, t :=
   // time, a
   // := acceleration")
-  this->position.x +=
-      this->velocity.x * time + 0.5f * this->acceleration.x * time * time;
-  this->position.y +=
-      this->velocity.y * time + 0.5f * this->acceleration.y * time * time;
+  this->set_position(
+      this->position.x +=
+      this->velocity.x * time + 0.5f * this->acceleration.x * time * time,
+      this->position.y +=
+      this->velocity.y * time + 0.5f * this->acceleration.y * time * time);
 }

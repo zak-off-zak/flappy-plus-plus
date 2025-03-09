@@ -33,17 +33,16 @@ public:
    */
   void draw(sf::RenderWindow &window);
   /**
-   * @brief Updates the position of the birds sprite
+   * @brief Updates the position of the bird
    *
    * @param time The time step for that the sprite has to be updated
    */
-  void update_sprite(float time);
+  void update(float time);
   /**
    * @brief Make the bird flap
    *
-   * @param window Window inside that the bird exists
    */
-  void flap(sf::RenderWindow &window);
+  void flap();
   /**
    * @brief Returns the bounds of the brird object
    */
