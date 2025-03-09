@@ -39,14 +39,6 @@ void Object::apply_force(sf::Vector2<float> force) {
                    this->acceleration.y + force.y / this->mass);
 }
 
-sf::Vector2<float> Object::get_velocity(float time) { return this->velocity; }
-
-sf::Vector2<float> Object::get_position(float time) { return this->position; }
-
-sf::Vector2<float> Object::get_acceleration(float time) {
-  return this->acceleration;
-}
-
 void Object::update_object(float time) {
   // Calculate new velocity using the equation: v += a * t (v := velocity, a :=
   // acceleration, t := time)
@@ -57,8 +49,9 @@ void Object::update_object(float time) {
   // := new position, x_0 := initial position, v : = current velocity, t :=
   // time, a
   // := acceleration")
-  this->position.x +=
-      this->velocity.x * time + 0.5f * this->acceleration.x * time * time;
-  this->position.y +=
-      this->velocity.y * time + 0.5f * this->acceleration.y * time * time;
+  this->set_position(
+      this->position.x +=
+      this->velocity.x * time + 0.5f * this->acceleration.x * time * time,
+      this->position.y +=
+      this->velocity.y * time + 0.5f * this->acceleration.y * time * time);
 }
