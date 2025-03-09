@@ -41,9 +41,8 @@ public:
   /**
    * @brief Make the bird flap
    *
-   * @param window Window inside that the bird exists
    */
-  void flap(sf::RenderWindow &window);
+  void flap();
   /**
    * @brief Returns the bounds of the brird object
    */

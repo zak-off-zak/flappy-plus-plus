@@ -76,13 +76,15 @@ void PlayState::init(Game *game) {
                                  this->score_text.getLocalBounds().size.x) /
                                     2.f,
                                 30});
+
+  this->bird.flap();
 }
 
 void PlayState::handle_input(Game *game,
                              const std::optional<sf::Event> &event) {
   // Make the bird flap if the spacebar is hit
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-    bird.flap(game->get_window());
+    bird.flap();
   }
   // Push the menu state to the stack to switch to menu without loosing the
   // progress, when the escape key is hit

@@ -25,7 +25,7 @@ void Bird::update(float time) {
   this->sprite.setPosition(this->position);
 }
 
-void Bird::flap(sf::RenderWindow &window) {
+void Bird::flap() {
   // Push the bird upwards by setting the y-component of the birds velocity to
   // the flap strength
   this->set_velocity(this->velocity.x, this->falp_strength);
