@@ -14,10 +14,7 @@ MenuState::MenuState()
 
 void MenuState::init(Game *game) {
   // Setting Up Background
-  if (!this->background_texture.loadFromFile(
-          "assets/kenney_physics-assets/PNG/Backgrounds/blue_desert.png")) {
-    std::cerr << "Error loading background texture!" << std::endl;
-  }
+  this->background_texture = game->get_background_texture();
 
   this->background_sprite = sf::Sprite(this->background_texture);
   this->background_sprite.setTexture(this->background_texture);

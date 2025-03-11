@@ -24,10 +24,7 @@ void PlayState::init(Game *game) {
   this->pipe_spacing = 400;
 
   // Setting Up Background
-  if (!this->background_texture.loadFromFile(
-          "assets/kenney_physics-assets/PNG/Backgrounds/blue_desert.png")) {
-    std::cerr << "Error loading background texture!" << std::endl;
-  }
+  this->background_texture = game->get_background_texture();
 
   this->background_sprite = sf::Sprite(this->background_texture);
   this->background_sprite.setTexture(this->background_texture);
@@ -39,20 +36,12 @@ void PlayState::init(Game *game) {
        float(window_size.y) / background_bounds.size.y});
 
   // Setting Up the Bird
-  if (!this->bird_texture.loadFromFile(
-          "assets/kenney_physics-assets/Spritesheet/"
-          "spritesheet_aliens.png")) {
-    std::cerr << "Error loading bird texture!" << std::endl;
-  }
+  this->bird_texture = game->get_bird_texture();
 
   this->bird = Bird(212.f, 150.f, 10, -50, this->bird_texture);
 
   // Setting Up Pipes
-  if (!this->pipe_texture.loadFromFile(
-          "assets/kenney_physics-assets/Spritesheet/"
-          "spritesheet_explosive.png")) {
-    std::cerr << "Error loading pipe texture!" << std::endl;
-  }
+  this->pipe_texture = game->get_pipe_texture();
 
   // Generate the first 7 pipes and add them to the vector
   for (int i = 0; i < 7; i++) {

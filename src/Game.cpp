@@ -1,4 +1,5 @@
 #include "../include/Game.h"
+#include <iostream>
 
 Game::Game()
     : window(sf::VideoMode({1200, 600}), "Flappy Bird",
@@ -7,6 +8,7 @@ Game::Game()
   this->score = 0;
   this->poped_pipes = 0;
   this->game_over = false;
+  this->load_textures();
 }
 
 void Game::push_state(std::unique_ptr<GameState> state) {
@@ -33,6 +35,35 @@ GameState *Game::get_current_state() {
 }
 
 sf::RenderWindow &Game::get_window() { return this->window; }
+
+sf::Texture Game::get_background_texture() { return this->background_texture; }
+
+sf::Texture Game::get_bird_texture() { return this->bird_texture; }
+
+sf::Texture Game::get_pipe_texture() { return this->pipe_texture; }
+
+void Game::load_textures() {
+
+  // Load the background texture
+  if (!this->background_texture.loadFromFile(
+          "assets/kenney_physics-assets/PNG/Backgrounds/blue_desert.png")) {
+    std::cerr << "Error loading background texture!" << std::endl;
+  }
+
+  // Load the bird texture
+  if (!this->bird_texture.loadFromFile(
+          "assets/kenney_physics-assets/Spritesheet/"
+          "spritesheet_aliens.png")) {
+    std::cerr << "Error loading bird texture!" << std::endl;
+  }
+
+  // Load the pipes texture
+  if (!this->pipe_texture.loadFromFile(
+          "assets/kenney_physics-assets/Spritesheet/"
+          "spritesheet_explosive.png")) {
+    std::cerr << "Error loading pipe texture!" << std::endl;
+  }
+}
 
 void Game::run() {
   sf::Clock clock;
