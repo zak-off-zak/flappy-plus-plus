@@ -7,7 +7,7 @@
 #include <random>
 
 PlayState::PlayState(Game &game)
-    : bird(212.f, 200.f, 10, -50, sf::Texture()),
+    : bird(212.f, 150.f, 10, -50, game.get_bird_texture()),
       background_sprite(game.get_background_texture()),
       score_text(game.get_ui_font()) {}
 
@@ -30,11 +30,6 @@ void PlayState::init(Game *game) {
   this->background_sprite.setScale(
       {float(window_size.x) / background_bounds.size.x,
        float(window_size.y) / background_bounds.size.y});
-
-  // Setting Up the Bird
-  this->bird_texture = game->get_bird_texture();
-
-  this->bird = Bird(212.f, 150.f, 10, -50, this->bird_texture);
 
   // Setting Up Pipes
   this->pipe_texture = game->get_pipe_texture();

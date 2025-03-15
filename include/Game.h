@@ -70,7 +70,7 @@ public:
   /**
    * @brief Returns the texture for the bird object
    */
-  sf::Texture get_bird_texture();
+  const sf::Texture &get_bird_texture();
   /**
    * @brief Return the texture for pipes
    */
