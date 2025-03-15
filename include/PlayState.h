@@ -63,8 +63,6 @@ private:
   std::uniform_int_distribution<int> gap_position_dist;
   std::uniform_int_distribution<int> gap_size_dist;
   sf::Sprite background_sprite;
-  sf::Texture bird_texture;
-  sf::Texture pipe_texture;
   sf::Text score_text;
 };
 
