@@ -3,7 +3,6 @@
 #include "../include/PlayState.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include <iostream>
 #include <random>
 
 PlayState::PlayState(Game &game)
@@ -32,14 +31,13 @@ void PlayState::init(Game *game) {
        float(window_size.y) / background_bounds.size.y});
 
   // Setting Up Pipes
-  this->pipe_texture = game->get_pipe_texture();
-
   // Generate the first 7 pipes and add them to the vector
   for (int i = 0; i < 7; i++) {
     float gap_position = this->gap_position_dist(rng);
     float gap_size = this->gap_size_dist(rng);
     pipes.push_back(Pipe(game->get_window().getSize().x + i * pipe_spacing,
-                         gap_position, gap_size, 100, pipe_texture));
+                         gap_position, gap_size, 100,
+                         game->get_pipe_texture()));
   }
 
   // Set up the score text
@@ -87,7 +85,7 @@ void PlayState::update(Game *game, float time) {
       float gap_position = this->gap_position_dist(rng);
       float gap_size = this->gap_size_dist(rng);
       pipes.push_back(Pipe(last_pipe_x + pipe_spacing, gap_position, gap_size,
-                           100, pipe_texture));
+                           100, game->get_pipe_texture()));
     }
 
     // Update the score: check the pipe with the index = (current score - popped

@@ -74,7 +74,7 @@ public:
   /**
    * @brief Return the texture for pipes
    */
-  sf::Texture get_pipe_texture();
+  const sf::Texture &get_pipe_texture();
   /**
    * @brief Return the fornt to be used for UI elemnts
    */

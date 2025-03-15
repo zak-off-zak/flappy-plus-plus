@@ -43,7 +43,7 @@ const sf::Texture &Game::get_background_texture() {
 
 const sf::Texture &Game::get_bird_texture() { return this->bird_texture; }
 
-sf::Texture Game::get_pipe_texture() { return this->pipe_texture; }
+const sf::Texture &Game::get_pipe_texture() { return this->pipe_texture; }
 
 const sf::Font &Game::get_ui_font() { return this->ui_font; }
 
