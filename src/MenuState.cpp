@@ -7,16 +7,12 @@
 #include <SFML/Graphics/Sprite.hpp>
 
 MenuState::MenuState(Game &game)
-    : background_texture(), background_sprite(this->background_texture),
+    : background_sprite(game.get_background_texture()),
       menu_text(game.get_ui_font()), resume_button_text(game.get_ui_font()),
       restart_button_text(game.get_ui_font()), score_text(game.get_ui_font()) {}
 
 void MenuState::init(Game *game) {
   // Setting Up Background
-  this->background_texture = game->get_background_texture();
-
-  this->background_sprite = sf::Sprite(this->background_texture);
-  this->background_sprite.setTexture(this->background_texture);
 
   sf::Vector2u window_size = game->get_window().getSize();
   sf::FloatRect background_bounds = this->background_sprite.getGlobalBounds();

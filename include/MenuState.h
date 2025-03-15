@@ -54,7 +54,6 @@ public:
 
 protected:
 private:
-  sf::Texture background_texture;
   sf::Sprite background_sprite;
   sf::RectangleShape overlay;
   sf::RectangleShape rectangle;

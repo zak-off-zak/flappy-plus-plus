@@ -66,7 +66,7 @@ public:
   /**
    * @brief Returns the texture for the background
    */
-  sf::Texture get_background_texture();
+  const sf::Texture &get_background_texture();
   /**
    * @brief Returns the texture for the bird object
    */

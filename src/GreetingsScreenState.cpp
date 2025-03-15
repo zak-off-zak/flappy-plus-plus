@@ -5,16 +5,12 @@
 #include <memory>
 
 GreetingsScreenState::GreetingsScreenState(Game &game)
-    : background_sprite(this->background_texture),
+    : background_sprite(game.get_background_texture()),
       welcome_text(game.get_ui_font()), game_name_text(game.get_ui_font()),
       instructions_text(game.get_ui_font()) {}
 
 void GreetingsScreenState::init(Game *game) {
   // Setting Up Background
-  this->background_texture = game->get_background_texture();
-
-  this->background_sprite = sf::Sprite(this->background_texture);
-  this->background_sprite.setTexture(this->background_texture);
 
   sf::Vector2u window_size = game->get_window().getSize();
   sf::FloatRect background_bounds = this->background_sprite.getGlobalBounds();

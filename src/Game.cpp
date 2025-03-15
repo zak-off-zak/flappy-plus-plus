@@ -37,7 +37,9 @@ GameState *Game::get_current_state() {
 
 sf::RenderWindow &Game::get_window() { return this->window; }
 
-sf::Texture Game::get_background_texture() { return this->background_texture; }
+const sf::Texture &Game::get_background_texture() {
+  return this->background_texture;
+}
 
 sf::Texture Game::get_bird_texture() { return this->bird_texture; }
 

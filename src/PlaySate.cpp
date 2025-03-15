@@ -7,8 +7,8 @@
 #include <random>
 
 PlayState::PlayState(Game &game)
-    : bird(212.f, 200.f, 10, -50, sf::Texture()), background_texture(),
-      background_sprite(this->background_texture),
+    : bird(212.f, 200.f, 10, -50, sf::Texture()),
+      background_sprite(game.get_background_texture()),
       score_text(game.get_ui_font()) {}
 
 void PlayState::init(Game *game) {
@@ -25,11 +25,6 @@ void PlayState::init(Game *game) {
   this->pipe_spacing = 400;
 
   // Setting Up Background
-  this->background_texture = game->get_background_texture();
-
-  this->background_sprite = sf::Sprite(this->background_texture);
-  this->background_sprite.setTexture(this->background_texture);
-
   sf::Vector2u window_size = game->get_window().getSize();
   sf::FloatRect background_bounds = this->background_sprite.getGlobalBounds();
   this->background_sprite.setScale(
