@@ -35,7 +35,7 @@ GameState *Game::get_current_state() {
   return this->states.empty() ? nullptr : this->states.top().get();
 }
 
-sf::RenderWindow &Game::get_window() { return this->window; }
+const sf::RenderWindow &Game::get_window() { return this->window; }
 
 const sf::Texture &Game::get_background_texture() {
   return this->background_texture;

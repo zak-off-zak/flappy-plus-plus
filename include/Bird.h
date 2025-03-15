@@ -54,7 +54,7 @@ public:
    * @param pipe Pipe obejct to check if the bird object has collided with it
    * @return True, if bird is experiencing a collision
    */
-  bool is_collided(sf::RenderWindow &window, Pipe &pipe);
+  bool is_collided(const sf::RenderWindow &window, Pipe &pipe);
 
 protected:
 private:
@@ -62,7 +62,7 @@ private:
   sf::Texture texture;
   float falp_strength;
 
-  bool collided_with_screen_borders(sf::RenderWindow &window);
+  bool collided_with_screen_borders(const sf::RenderWindow &window);
   bool collided_with_pipe(Pipe &pipe);
 };
 

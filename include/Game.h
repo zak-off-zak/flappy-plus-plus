@@ -62,7 +62,7 @@ public:
    * @brief Returns the window of the game
    */
 
-  sf::RenderWindow &get_window();
+  const sf::RenderWindow &get_window();
   /**
    * @brief Returns the texture for the background
    */

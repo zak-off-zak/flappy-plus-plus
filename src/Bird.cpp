@@ -33,7 +33,7 @@ void Bird::flap() {
 
 sf::FloatRect Bird::getBounds() const { return this->sprite.getGlobalBounds(); }
 
-bool Bird::collided_with_screen_borders(sf::RenderWindow &window) {
+bool Bird::collided_with_screen_borders(const sf::RenderWindow &window) {
   // Check if the bird is collided with the left or the right side of the screen
   if (this->getBounds().position.x < 0 ||
       this->getBounds().position.x + this->getBounds().size.x >
@@ -59,7 +59,7 @@ bool Bird::collided_with_pipe(Pipe &pipe) {
   return false;
 }
 
-bool Bird::is_collided(sf::RenderWindow &window, Pipe &pipe) {
+bool Bird::is_collided(const sf::RenderWindow &window, Pipe &pipe) {
   // Check if any collision is detected
   return this->collided_with_pipe(pipe) ||
          this->collided_with_screen_borders(window);
