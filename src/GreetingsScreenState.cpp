@@ -2,12 +2,12 @@
 #include "../include/Game.h"
 #include "../include/MenuState.h"
 #include <SFML/Graphics/Color.hpp>
-#include <iostream>
 #include <memory>
 
-GreetingsScreenState::GreetingsScreenState()
-    : background_sprite(this->background_texture), welcome_text(this->ui_font),
-      game_name_text(this->ui_font), instructions_text(this->ui_font) {}
+GreetingsScreenState::GreetingsScreenState(Game &game)
+    : background_sprite(this->background_texture),
+      welcome_text(game.get_ui_font()), game_name_text(game.get_ui_font()),
+      instructions_text(game.get_ui_font()) {}
 
 void GreetingsScreenState::init(Game *game) {
   // Setting Up Background
@@ -38,11 +38,6 @@ void GreetingsScreenState::init(Game *game) {
        float(window_size.y - this->rectangle.getSize().y) / 2.f});
 
   // Setting the titel
-  if (!this->ui_font.openFromFile(
-          "assets/kenney_ui-pack/Font/Kenney Future.ttf")) {
-    std::cerr << "Error loading ui font!" << std::endl;
-  }
-  this->welcome_text.setFont(this->ui_font);
   this->welcome_text.setString("Welcome to");
   this->welcome_text.setCharacterSize(30);
   // Postion the welcome text in the top-middle part of the background rectangle
@@ -54,7 +49,6 @@ void GreetingsScreenState::init(Game *game) {
        (this->rectangle.getPosition().y) + 30});
 
   // Set up a banner with the name of the game
-  this->game_name_text.setFont(this->ui_font);
   this->game_name_text.setString("Flappy-Plus-Plus");
   this->game_name_text.setCharacterSize(50);
   this->game_name_text.setFillColor(sf::Color(255, 204, 1));
@@ -68,7 +62,6 @@ void GreetingsScreenState::init(Game *game) {
        (this->welcome_text.getPosition().y + 50)});
 
   // Set up a text with instruction to the player
-  this->instructions_text.setFont(this->ui_font);
   this->instructions_text.setString(
       "Press Space to start\nPress Escape to open the menu");
   this->instructions_text.setCharacterSize(20);
@@ -89,7 +82,7 @@ void GreetingsScreenState::handle_input(Game *game,
   }
   // Switch to the menu by changing to the MenuState
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
-    game->changeState(std::make_unique<MenuState>());
+    game->changeState(std::make_unique<MenuState>(*game));
   }
 }
 

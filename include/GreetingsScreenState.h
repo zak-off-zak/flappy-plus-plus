@@ -18,7 +18,7 @@ public:
   /**
    * @brief Greeting screen state constructor
    */
-  GreetingsScreenState();
+  GreetingsScreenState(Game &game);
 
   /**
    * @brief Initiates a new greeting screen state
@@ -58,7 +58,6 @@ private:
   sf::Sprite background_sprite;
   sf::RectangleShape overlay;
   sf::RectangleShape rectangle;
-  sf::Font ui_font;
   sf::Text welcome_text;
   sf::Text game_name_text;
   sf::Text instructions_text;

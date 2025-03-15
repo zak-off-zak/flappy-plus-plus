@@ -3,6 +3,7 @@
 
 #include "GameState.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <memory>
 #include <stack>
@@ -75,6 +76,10 @@ public:
    */
   sf::Texture get_pipe_texture();
   /**
+   * @brief Return the fornt to be used for UI elemnts
+   */
+  const sf::Font &get_ui_font();
+  /**
    * @brief Runs the game by taking a state form the top of the stack,
    * initializing it and running the handle_input(), update() and render()
    * methods of that state
@@ -88,8 +93,10 @@ private:
   sf::Texture background_texture;
   sf::Texture bird_texture;
   sf::Texture pipe_texture;
+  sf::Font ui_font;
 
   void load_textures();
+  void load_fonts();
 };
 
 #endif // GAME_H

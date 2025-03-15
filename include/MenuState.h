@@ -18,7 +18,7 @@ public:
   /**
    * @brief Menu state constructor
    */
-  MenuState();
+  MenuState(Game &game);
 
   /**
    * @brief Initiates new menu state
@@ -58,7 +58,6 @@ private:
   sf::Sprite background_sprite;
   sf::RectangleShape overlay;
   sf::RectangleShape rectangle;
-  sf::Font ui_font;
   sf::Text menu_text;
   sf::RectangleShape resume_button;
   sf::Text resume_button_text;

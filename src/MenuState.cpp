@@ -5,12 +5,11 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include <iostream>
 
-MenuState::MenuState()
+MenuState::MenuState(Game &game)
     : background_texture(), background_sprite(this->background_texture),
-      menu_text(this->ui_font), resume_button_text(this->ui_font),
-      restart_button_text(this->ui_font), score_text(this->ui_font) {}
+      menu_text(game.get_ui_font()), resume_button_text(game.get_ui_font()),
+      restart_button_text(game.get_ui_font()), score_text(game.get_ui_font()) {}
 
 void MenuState::init(Game *game) {
   // Setting Up Background
@@ -42,11 +41,6 @@ void MenuState::init(Game *game) {
        float(window_size.y - this->rectangle.getSize().y) / 2.f});
 
   // Setting the titel
-  if (!this->ui_font.openFromFile(
-          "assets/kenney_ui-pack/Font/Kenney Future.ttf")) {
-    std::cerr << "Error loading ui font!" << std::endl;
-  }
-  this->menu_text.setFont(this->ui_font);
   // Set the appropriate title text based on the game_over variable
   if (game->game_over) {
     this->menu_text.setString("Game Over");
@@ -63,7 +57,6 @@ void MenuState::init(Game *game) {
                                (this->rectangle.getPosition().y)});
 
   // Setting the score text
-  this->score_text.setFont(this->ui_font);
   this->score_text.setString("Score: " + std::to_string(game->score));
   this->score_text.setCharacterSize(40);
   // Postion the score below the title
@@ -84,7 +77,6 @@ void MenuState::init(Game *game) {
   this->resume_button.setPosition(
       {float(window_size.x - this->resume_button.getSize().x) / 2.f - 100,
        float(window_size.y - this->resume_button.getSize().y) / 2.f + 100});
-  this->resume_button_text.setFont(this->ui_font);
   this->resume_button_text.setString("Resume");
   this->resume_button_text.setCharacterSize(25);
   // Postion the resume text in  the middle of the resume button rectangle
@@ -111,7 +103,6 @@ void MenuState::init(Game *game) {
         {float(window_size.x - this->restart_button.getSize().x) / 2.f,
          float(window_size.y - this->restart_button.getSize().y) / 2.f + 100});
   }
-  this->restart_button_text.setFont(this->ui_font);
   this->restart_button_text.setString("Restart");
   this->restart_button_text.setCharacterSize(25);
   // Postion the restart text in  the middle of the restart button rectangle
@@ -150,7 +141,7 @@ void MenuState::handle_input(Game *game,
     if (this->restart_button.getGlobalBounds().contains(mouse_position)) {
       game->pop_state();
       game->pop_state();
-      game->push_state(std::make_unique<PlayState>());
+      game->push_state(std::make_unique<PlayState>(*game));
     }
   }
 }

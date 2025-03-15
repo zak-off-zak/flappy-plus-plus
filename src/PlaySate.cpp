@@ -6,9 +6,10 @@
 #include <iostream>
 #include <random>
 
-PlayState::PlayState()
+PlayState::PlayState(Game &game)
     : bird(212.f, 200.f, 10, -50, sf::Texture()), background_texture(),
-      background_sprite(this->background_texture), score_text(this->ui_font) {}
+      background_sprite(this->background_texture),
+      score_text(game.get_ui_font()) {}
 
 void PlayState::init(Game *game) {
   // Set the inital state of the game
@@ -52,11 +53,6 @@ void PlayState::init(Game *game) {
   }
 
   // Set up the score text
-  if (!this->ui_font.openFromFile(
-          "assets/kenney_ui-pack/Font/Kenney Future.ttf")) {
-    std::cerr << "Error loading ui font!" << std::endl;
-  }
-  this->score_text.setFont(this->ui_font);
   this->score_text.setString("Score: " + std::to_string(game->score));
   this->score_text.setCharacterSize(40);
   this->score_text.setFillColor(sf::Color(241, 156, 183));
@@ -79,7 +75,7 @@ void PlayState::handle_input(Game *game,
   // progress, when the escape key is hit
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
     if (!game->game_over) {
-      game->push_state(std::make_unique<MenuState>());
+      game->push_state(std::make_unique<MenuState>(*game));
     }
   }
 }
@@ -124,7 +120,7 @@ void PlayState::update(Game *game, float time) {
       // state with a restart button.
       if (bird.is_collided(game->get_window(), pipe)) {
         game->game_over = true;
-        game->push_state(std::make_unique<MenuState>());
+        game->push_state(std::make_unique<MenuState>(*game));
         break;
       }
     }

@@ -19,7 +19,7 @@ public:
   /**
    * @brief Constructor of the playing state
    */
-  PlayState();
+  PlayState(Game &game);
   /**
    * @brief Initiates a new playing state
    *
@@ -66,7 +66,6 @@ private:
   sf::Sprite background_sprite;
   sf::Texture bird_texture;
   sf::Texture pipe_texture;
-  sf::Font ui_font;
   sf::Text score_text;
 };
 

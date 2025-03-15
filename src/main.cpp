@@ -8,8 +8,8 @@ int main() {
   // ot the stack. Display the greeting screen by pushing the
   // GreetingsScreenState on top of it. Run the game.
   Game game;
-  game.push_state(std::make_unique<PlayState>());
-  game.push_state(std::make_unique<GreetingsScreenState>());
+  game.push_state(std::make_unique<PlayState>(game));
+  game.push_state(std::make_unique<GreetingsScreenState>(game));
   game.run();
   return 0;
 }

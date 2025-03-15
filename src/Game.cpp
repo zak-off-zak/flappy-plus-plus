@@ -9,6 +9,7 @@ Game::Game()
   this->poped_pipes = 0;
   this->game_over = false;
   this->load_textures();
+  this->load_fonts();
 }
 
 void Game::push_state(std::unique_ptr<GameState> state) {
@@ -42,8 +43,9 @@ sf::Texture Game::get_bird_texture() { return this->bird_texture; }
 
 sf::Texture Game::get_pipe_texture() { return this->pipe_texture; }
 
-void Game::load_textures() {
+const sf::Font &Game::get_ui_font() { return this->ui_font; }
 
+void Game::load_textures() {
   // Load the background texture
   if (!this->background_texture.loadFromFile(
           "assets/kenney_physics-assets/PNG/Backgrounds/blue_desert.png")) {
@@ -62,6 +64,14 @@ void Game::load_textures() {
           "assets/kenney_physics-assets/Spritesheet/"
           "spritesheet_explosive.png")) {
     std::cerr << "Error loading pipe texture!" << std::endl;
+  }
+}
+
+void Game::load_fonts() {
+  // Load the UI font
+  if (!this->ui_font.openFromFile(
+          "assets/kenney_ui-pack/Font/Kenney Future.ttf")) {
+    std::cerr << "Error loading ui font!" << std::endl;
   }
 }
 
