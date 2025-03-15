@@ -9,10 +9,10 @@ GreetingsScreenState::GreetingsScreenState(Game &game)
       welcome_text(game.get_ui_font()), game_name_text(game.get_ui_font()),
       instructions_text(game.get_ui_font()) {}
 
-void GreetingsScreenState::init(Game *game) {
+void GreetingsScreenState::init(Game &game) {
   // Setting Up Background
 
-  sf::Vector2u window_size = game->get_window().getSize();
+  sf::Vector2u window_size = game.get_window().getSize();
   sf::FloatRect background_bounds = this->background_sprite.getGlobalBounds();
   this->background_sprite.setScale(
       {float(window_size.x) / background_bounds.size.x,
@@ -70,21 +70,21 @@ void GreetingsScreenState::init(Game *game) {
        (this->game_name_text.getPosition().y + 100)});
 }
 
-void GreetingsScreenState::handle_input(Game *game,
+void GreetingsScreenState::handle_input(Game &game,
                                         const std::optional<sf::Event> &event) {
   // Start playing the game by popping the top GreetingsScreenState
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-    game->pop_state();
+    game.pop_state();
   }
   // Switch to the menu by changing to the MenuState
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
-    game->changeState(std::make_unique<MenuState>(*game));
+    game.changeState(std::make_unique<MenuState>(game));
   }
 }
 
-void GreetingsScreenState::update(Game *game, float time) {}
+void GreetingsScreenState::update(Game &game, float time) {}
 
-void GreetingsScreenState::render(Game *game, sf::RenderWindow &window) {
+void GreetingsScreenState::render(Game &game, sf::RenderWindow &window) {
   // Draw all of the objects on the screen
   window.draw(this->background_sprite);
   window.draw(this->overlay);

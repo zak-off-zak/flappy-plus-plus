@@ -14,7 +14,7 @@ Game::Game()
 
 void Game::push_state(std::unique_ptr<GameState> state) {
   // Init the new state and push it to the stack
-  state->init(this);
+  state->init(*this);
   this->states.push(std::move(state));
 }
 
@@ -92,19 +92,19 @@ void Game::run() {
 
       // Get the current state and pass the event handling to it
       if (this->get_current_state()) {
-        this->get_current_state()->handle_input(this, event);
+        this->get_current_state()->handle_input(*this, event);
       }
     }
 
     // Get the current state and update it
     if (this->get_current_state()) {
-      this->get_current_state()->update(this, time);
+      this->get_current_state()->update(*this, time);
     }
 
     // Clear the window, get the current state and draw it
     this->window.clear();
     if (this->get_current_state()) {
-      this->get_current_state()->render(this, this->window);
+      this->get_current_state()->render(*this, this->window);
     }
     // display all updates in the window
     this->window.display();

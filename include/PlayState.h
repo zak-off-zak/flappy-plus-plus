@@ -26,7 +26,7 @@ public:
    * @param game Game game object containing important global informatio about
    * the game
    */
-  void init(Game *game) override;
+  void init(Game &game) override;
   /**
    * @brief Handles the user input, e.g. a pressing on the space to make
    * a bird flap
@@ -35,7 +35,7 @@ public:
    * the game
    * @param event Event that has to be handeled
    */
-  void handle_input(Game *game, const std::optional<sf::Event> &event) override;
+  void handle_input(Game &game, const std::optional<sf::Event> &event) override;
   /**
    * @brief Updates all object inside the playing state, e.g. the bird and all
    * of the pipes
@@ -44,7 +44,7 @@ public:
    * the game
    * @param time Time step to update all of the objects
    */
-  void update(Game *game, float time) override;
+  void update(Game &game, float time) override;
   /**
    * @brief Renders all of the playing state objests
    *
@@ -52,7 +52,7 @@ public:
    * the game
    * @param window Window for the objects to be displayed in
    */
-  void render(Game *game, sf::RenderWindow &window) override;
+  void render(Game &game, sf::RenderWindow &window) override;
 
 protected:
 private:

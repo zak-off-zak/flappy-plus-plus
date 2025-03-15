@@ -24,7 +24,7 @@ public:
    * @param game Game game object containing important global informatio about
    * the game
    */
-  virtual void init(Game *game) = 0;
+  virtual void init(Game &game) = 0;
   /**
    * @brief Handles the user input based on the state
    *
@@ -32,7 +32,7 @@ public:
    * the game
    * @param event Event that has to be handeled
    */
-  virtual void handle_input(Game *game,
+  virtual void handle_input(Game &game,
                             const std::optional<sf::Event> &event) = 0;
   /**
    * @brief Progresses the state forward
@@ -41,7 +41,7 @@ public:
    * the game
    * @param time The time step used to calculate the new state
    */
-  virtual void update(Game *game, float time) = 0;
+  virtual void update(Game &game, float time) = 0;
   /**
    * @brief Renders the state objects
    *
@@ -49,7 +49,7 @@ public:
    * the game
    * @param window Window for objects to be rendered in
    */
-  virtual void render(Game *game, sf::RenderWindow &window) = 0;
+  virtual void render(Game &game, sf::RenderWindow &window) = 0;
 
 protected:
 private:

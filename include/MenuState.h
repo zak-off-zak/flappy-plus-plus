@@ -26,7 +26,7 @@ public:
    * @param game Game game object containing important global informatio about
    * the game
    */
-  void init(Game *game) override;
+  void init(Game &game) override;
   /**
    * @brief Handles all of the user input regarding the menu
    *
@@ -34,7 +34,7 @@ public:
    * the game
    * @param event Event that has to be triggered
    */
-  void handle_input(Game *game, const std::optional<sf::Event> &event) override;
+  void handle_input(Game &game, const std::optional<sf::Event> &event) override;
   /**
    * @brief Updates the internal state of the the menu
    *
@@ -42,7 +42,7 @@ public:
    * the game
    * @param time Time step to calculate the new state of the menu
    */
-  void update(Game *game, float time) override;
+  void update(Game &game, float time) override;
   /**
    * @brief Renders all of the internal objects of the menu state
    *
@@ -50,7 +50,7 @@ public:
    * the game
    * @param window Window for the objects to be displayed in
    */
-  void render(Game *game, sf::RenderWindow &window) override;
+  void render(Game &game, sf::RenderWindow &window) override;
 
 protected:
 private:
