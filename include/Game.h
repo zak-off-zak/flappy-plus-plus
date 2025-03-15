@@ -3,6 +3,8 @@
 
 #include "GameState.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <memory>
 #include <stack>
 
@@ -50,17 +52,33 @@ public:
    * @param state State to be pushed to the top
    */
   void changeState(std::unique_ptr<GameState> state);
-  // TODO:: Rename to peek?
   /**
    * @brief Returns the current state from the top of the state
    *
-   * @return [TODO:return]
+   * @return current state of the game
    */
   GameState *get_current_state();
   /**
    * @brief Returns the window of the game
    */
-  sf::RenderWindow &get_window();
+
+  const sf::RenderWindow &get_window();
+  /**
+   * @brief Returns the texture for the background
+   */
+  const sf::Texture &get_background_texture();
+  /**
+   * @brief Returns the texture for the bird object
+   */
+  const sf::Texture &get_bird_texture();
+  /**
+   * @brief Return the texture for pipes
+   */
+  const sf::Texture &get_pipe_texture();
+  /**
+   * @brief Return the fornt to be used for UI elemnts
+   */
+  const sf::Font &get_ui_font();
   /**
    * @brief Runs the game by taking a state form the top of the stack,
    * initializing it and running the handle_input(), update() and render()
@@ -72,6 +90,13 @@ protected:
 private:
   sf::RenderWindow window;
   std::stack<std::unique_ptr<GameState>> states;
+  sf::Texture background_texture;
+  sf::Texture bird_texture;
+  sf::Texture pipe_texture;
+  sf::Font ui_font;
+
+  void load_textures();
+  void load_fonts();
 };
 
 #endif // GAME_H

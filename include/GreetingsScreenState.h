@@ -18,7 +18,7 @@ public:
   /**
    * @brief Greeting screen state constructor
    */
-  GreetingsScreenState();
+  GreetingsScreenState(Game &game);
 
   /**
    * @brief Initiates a new greeting screen state
@@ -26,7 +26,7 @@ public:
    * @param game Game game object containing important global informatio about
    * the game
    */
-  void init(Game *game) override;
+  void init(Game &game) override;
   /**
    * @brief Handles the user input while the greetings screen is being schown
    *
@@ -34,7 +34,7 @@ public:
    * the game
    * @param event Event to be handeled
    */
-  void handle_input(Game *game, const std::optional<sf::Event> &event) override;
+  void handle_input(Game &game, const std::optional<sf::Event> &event) override;
   /**
    * @brief Updates the greeting screen based on the time step
    *
@@ -42,7 +42,7 @@ public:
    * the game
    * @param time Time step to calculate the update to the greetings screen
    */
-  void update(Game *game, float time) override;
+  void update(Game &game, float time) override;
   /**
    * @brief Renders all of the internal objects of the greetings screen state
    *
@@ -50,15 +50,13 @@ public:
    * the game
    * @param window Window for the objects to be displayed in
    */
-  void render(Game *game, sf::RenderWindow &window) override;
+  void render(Game &game, sf::RenderWindow &window) override;
 
 protected:
 private:
-  sf::Texture background_texture;
   sf::Sprite background_sprite;
   sf::RectangleShape overlay;
   sf::RectangleShape rectangle;
-  sf::Font ui_font;
   sf::Text welcome_text;
   sf::Text game_name_text;
   sf::Text instructions_text;

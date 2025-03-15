@@ -2,24 +2,17 @@
 #include "../include/Game.h"
 #include "../include/MenuState.h"
 #include <SFML/Graphics/Color.hpp>
-#include <iostream>
 #include <memory>
 
-GreetingsScreenState::GreetingsScreenState()
-    : background_sprite(this->background_texture), welcome_text(this->ui_font),
-      game_name_text(this->ui_font), instructions_text(this->ui_font) {}
+GreetingsScreenState::GreetingsScreenState(Game &game)
+    : background_sprite(game.get_background_texture()),
+      welcome_text(game.get_ui_font()), game_name_text(game.get_ui_font()),
+      instructions_text(game.get_ui_font()) {}
 
-void GreetingsScreenState::init(Game *game) {
+void GreetingsScreenState::init(Game &game) {
   // Setting Up Background
-  if (!this->background_texture.loadFromFile(
-          "assets/kenney_physics-assets/PNG/Backgrounds/blue_desert.png")) {
-    std::cerr << "Error loading background texture!" << std::endl;
-  }
 
-  this->background_sprite = sf::Sprite(this->background_texture);
-  this->background_sprite.setTexture(this->background_texture);
-
-  sf::Vector2u window_size = game->get_window().getSize();
+  sf::Vector2u window_size = game.get_window().getSize();
   sf::FloatRect background_bounds = this->background_sprite.getGlobalBounds();
   this->background_sprite.setScale(
       {float(window_size.x) / background_bounds.size.x,
@@ -41,11 +34,6 @@ void GreetingsScreenState::init(Game *game) {
        float(window_size.y - this->rectangle.getSize().y) / 2.f});
 
   // Setting the titel
-  if (!this->ui_font.openFromFile(
-          "assets/kenney_ui-pack/Font/Kenney Future.ttf")) {
-    std::cerr << "Error loading ui font!" << std::endl;
-  }
-  this->welcome_text.setFont(this->ui_font);
   this->welcome_text.setString("Welcome to");
   this->welcome_text.setCharacterSize(30);
   // Postion the welcome text in the top-middle part of the background rectangle
@@ -57,7 +45,6 @@ void GreetingsScreenState::init(Game *game) {
        (this->rectangle.getPosition().y) + 30});
 
   // Set up a banner with the name of the game
-  this->game_name_text.setFont(this->ui_font);
   this->game_name_text.setString("Flappy-Plus-Plus");
   this->game_name_text.setCharacterSize(50);
   this->game_name_text.setFillColor(sf::Color(255, 204, 1));
@@ -71,7 +58,6 @@ void GreetingsScreenState::init(Game *game) {
        (this->welcome_text.getPosition().y + 50)});
 
   // Set up a text with instruction to the player
-  this->instructions_text.setFont(this->ui_font);
   this->instructions_text.setString(
       "Press Space to start\nPress Escape to open the menu");
   this->instructions_text.setCharacterSize(20);
@@ -84,21 +70,21 @@ void GreetingsScreenState::init(Game *game) {
        (this->game_name_text.getPosition().y + 100)});
 }
 
-void GreetingsScreenState::handle_input(Game *game,
+void GreetingsScreenState::handle_input(Game &game,
                                         const std::optional<sf::Event> &event) {
   // Start playing the game by popping the top GreetingsScreenState
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-    game->pop_state();
+    game.pop_state();
   }
   // Switch to the menu by changing to the MenuState
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
-    game->changeState(std::make_unique<MenuState>());
+    game.changeState(std::make_unique<MenuState>(game));
   }
 }
 
-void GreetingsScreenState::update(Game *game, float time) {}
+void GreetingsScreenState::update(Game &game, float time) {}
 
-void GreetingsScreenState::render(Game *game, sf::RenderWindow &window) {
+void GreetingsScreenState::render(Game &game, sf::RenderWindow &window) {
   // Draw all of the objects on the screen
   window.draw(this->background_sprite);
   window.draw(this->overlay);
