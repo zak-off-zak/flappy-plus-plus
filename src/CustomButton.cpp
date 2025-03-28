@@ -8,7 +8,6 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Mouse.hpp>
-#include <iostream>
 
 CustomButton::CustomButton()
     : shape(), text(this->font), font(), on_click([]() {}) {
