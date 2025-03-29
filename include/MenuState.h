@@ -1,6 +1,7 @@
 #ifndef MENU_STATE
 #define MENU_STATE
 
+#include "Button.h"
 #include "GameState.h"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -58,12 +59,12 @@ private:
   sf::RectangleShape overlay;
   sf::RectangleShape rectangle;
   sf::Text menu_text;
-  sf::RectangleShape resume_button;
-  sf::Text resume_button_text;
-  sf::RectangleShape restart_button;
-  sf::Text restart_button_text;
   sf::Text score_text;
-  // CustomButton resume_button;
+  Button resume_button;
+  Button restart_button;
+
+  void resume(Game &game);
+  void restart(Game &game);
 };
 
 #endif // !MENU_STATE
