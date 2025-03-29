@@ -75,6 +75,17 @@ void MenuState::init(Game &game) {
                                 (this->rectangle.getPosition().y +
                                  this->rectangle.getLocalBounds().size.y / 2.f -
                                  this->score_text.getLocalBounds().size.y)});
+
+  // Change the position of the restart button based on the game_over state
+  if (!game.game_over) {
+    this->restart_button.setPosition(
+        {float(window_size.x - this->restart_button.getSize().x) / 2.f + 100,
+         float(window_size.y - this->restart_button.getSize().y) / 2.f + 100});
+  } else {
+    this->restart_button.setPosition(
+        {float(window_size.x - this->restart_button.getSize().x) / 2.f,
+         float(window_size.y - this->restart_button.getSize().y) / 2.f + 100});
+  }
 }
 
 void MenuState::handle_input(Game &game,

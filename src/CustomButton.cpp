@@ -37,11 +37,7 @@ CustomButton::CustomButton(const sf::Vector2f &position,
   this->text = text;
   this->text.setFont(font);
   this->text.setCharacterSize(font_size);
-  this->text.setPosition(
-      {this->shape.getPosition().x + ((this->shape.getLocalBounds().size.x -
-                                       this->text.getLocalBounds().size.x) /
-                                      2.f),
-       this->shape.getPosition().y + this->text.getLocalBounds().size.y / 2.f});
+  this->place_text();
 }
 
 void CustomButton::handle_event(const std::optional<sf::Event> &event,
@@ -67,3 +63,16 @@ void CustomButton::draw(sf::RenderTarget &target,
 }
 
 sf::Vector2f CustomButton::getSize() { return this->shape.getSize(); }
+
+void CustomButton::setPosition(sf::Vector2f new_position) {
+  this->shape.setPosition(new_position);
+  this->place_text();
+}
+
+void CustomButton::place_text() {
+  this->text.setPosition(
+      {this->shape.getPosition().x + ((this->shape.getLocalBounds().size.x -
+                                       this->text.getLocalBounds().size.x) /
+                                      2.f),
+       this->shape.getPosition().y + this->text.getLocalBounds().size.y / 2.f});
+}

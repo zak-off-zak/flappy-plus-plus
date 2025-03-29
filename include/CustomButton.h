@@ -67,12 +67,21 @@ public:
    */
   sf::Vector2f getSize();
 
+  /**
+   * @brief Setter for the positon of the bustton
+   *
+   * @param new_position The new position of the button
+   */
+  void setPosition(sf::Vector2f new_position);
+
 protected:
 private:
   sf::RectangleShape shape;
   sf::Text text;
   sf::Font font;
   std::function<void()> on_click;
+
+  void place_text();
 };
 
 #endif // !BUTTON
