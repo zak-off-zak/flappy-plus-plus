@@ -26,10 +26,11 @@ Button::Button(const sf::Vector2f &position, const sf::RectangleShape &shape,
                const sf::Font &font, unsigned int font_size,
                const std::function<void()> &on_click)
     : shape(shape), text(font), on_click(on_click) {
-  // Set the position, size and color of the custom buttons shape
+  // Set the position and color of the custom buttons shape
   this->shape.setPosition(position);
   this->shape.setFillColor(color);
 
+  // Set the text and the font of the button
   this->text = text;
   this->text.setFont(font);
   this->text.setCharacterSize(font_size);
@@ -53,6 +54,7 @@ void Button::handle_event(const std::optional<sf::Event> &event,
 }
 
 void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+  // Draw the buttons shape and its text
   target.draw(shape, states);
   target.draw(this->text, states);
 }
@@ -60,11 +62,13 @@ void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 sf::Vector2f Button::getSize() { return this->shape.getSize(); }
 
 void Button::setPosition(sf::Vector2f new_position) {
+  // Update the buttons position and move the text accordingly
   this->shape.setPosition(new_position);
   this->place_text();
 }
 
 void Button::place_text() {
+  // Center the text in the middle of the buttons shape
   this->text.setPosition(
       {this->shape.getPosition().x + ((this->shape.getLocalBounds().size.x -
                                        this->text.getLocalBounds().size.x) /
