@@ -13,22 +13,22 @@
 #include <functional>
 
 /**
- * @class CustomButton
+ * @class Button
  * @brief A custom consisting of a shape, text and an event handler
  *
  */
-class CustomButton : public sf::Drawable {
+class Button : public sf::Drawable {
 public:
   /**
    * @brief Default constructor of the custom button
    */
-  CustomButton();
+  Button();
   /**
    * @brief Copy constructor of the custom button
    *
    * @param other the other button that has to be copied
    */
-  CustomButton(const CustomButton &other);
+  Button(const Button &other);
   /**
    * @brief Constructor of the custom button
    *
@@ -40,7 +40,7 @@ public:
    * @param font Font for the buttons text
    * @param on_click Function to be triggered when the button is pressed
    */
-  CustomButton(const sf::Vector2f &position, const sf::Vector2f &size,
+  Button(const sf::Vector2f &position, const sf::Vector2f &size,
                const sf::RectangleShape &shape, const sf::Color &color,
                const sf::Text &text, const sf::Font &font,
                unsigned int font_size, const std::function<void()> &on_click);

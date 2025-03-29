@@ -1,4 +1,4 @@
-#include "../include/CustomButton.h"
+#include "../include/Button.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -9,7 +9,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Mouse.hpp>
 
-CustomButton::CustomButton()
+Button::Button()
     : shape(), text(this->font), font(), on_click([]() {}) {
   // Set up a default white button in the top left corner of the screen with the
   // size of 100 by 50
@@ -18,11 +18,11 @@ CustomButton::CustomButton()
   this->shape.setFillColor(sf::Color::White);
 }
 
-CustomButton::CustomButton(const CustomButton &other)
+Button::Button(const Button &other)
     : shape(other.shape), on_click(other.on_click), text(other.text),
       font(other.font) {}
 
-CustomButton::CustomButton(const sf::Vector2f &position,
+Button::Button(const sf::Vector2f &position,
                            const sf::Vector2f &size,
                            const sf::RectangleShape &shape,
                            const sf::Color &color, const sf::Text &text,
@@ -40,7 +40,7 @@ CustomButton::CustomButton(const sf::Vector2f &position,
   this->place_text();
 }
 
-void CustomButton::handle_event(const std::optional<sf::Event> &event,
+void Button::handle_event(const std::optional<sf::Event> &event,
                                 const sf::RenderWindow &window) {
   // Check if the left button of the mouse has been pressed
   if (event->is<sf::Event::MouseButtonPressed>() &&
@@ -56,20 +56,20 @@ void CustomButton::handle_event(const std::optional<sf::Event> &event,
   }
 }
 
-void CustomButton::draw(sf::RenderTarget &target,
+void Button::draw(sf::RenderTarget &target,
                         sf::RenderStates states) const {
   target.draw(shape, states);
   target.draw(this->text, states);
 }
 
-sf::Vector2f CustomButton::getSize() { return this->shape.getSize(); }
+sf::Vector2f Button::getSize() { return this->shape.getSize(); }
 
-void CustomButton::setPosition(sf::Vector2f new_position) {
+void Button::setPosition(sf::Vector2f new_position) {
   this->shape.setPosition(new_position);
   this->place_text();
 }
 
-void CustomButton::place_text() {
+void Button::place_text() {
   this->text.setPosition(
       {this->shape.getPosition().x + ((this->shape.getLocalBounds().size.x -
                                        this->text.getLocalBounds().size.x) /
