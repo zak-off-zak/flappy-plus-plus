@@ -12,16 +12,15 @@ MenuState::MenuState(Game &game)
       menu_text(game.get_ui_font()), score_text(game.get_ui_font()),
       resume_button({float(game.get_window().getSize().x - 150) / 2.f - 100,
                      float(game.get_window().getSize().y - 50) / 2.f + 100},
-                    {150, 50}, sf::RectangleShape({150, 50}),
-                    sf::Color(61, 186, 77),
+                    sf::RectangleShape({150, 50}), sf::Color(61, 186, 77),
                     sf::Text(game.get_ui_font(), "Resume"), game.get_ui_font(),
                     25, [this, &game]() { this->resume(game); }),
-      restart_button(
-          {float(game.get_window().getSize().x - 150) / 2.f + 100,
-           float(game.get_window().getSize().y - 50) / 2.f + 100},
-          {150, 50}, sf::RectangleShape({150, 50}), sf::Color(199, 57, 53),
-          sf::Text(game.get_ui_font(), "Restart"), game.get_ui_font(), 25,
-          [this, &game]() { this->restart(game); }) {}
+      restart_button({float(game.get_window().getSize().x - 150) / 2.f + 100,
+                      float(game.get_window().getSize().y - 50) / 2.f + 100},
+                     sf::RectangleShape({150, 50}), sf::Color(199, 57, 53),
+                     sf::Text(game.get_ui_font(), "Restart"),
+                     game.get_ui_font(), 25,
+                     [this, &game]() { this->restart(game); }) {}
 
 void MenuState::init(Game &game) {
   // Setting Up Background

@@ -33,17 +33,15 @@ public:
    * @brief Constructor of the custom button
    *
    * @param position Position of the custom button
-   * @param size Size of the custom button
    * @param shape Shape of the custom button
    * @param color Color of the custon button
    * @param text Text of the button
    * @param font Font for the buttons text
    * @param on_click Function to be triggered when the button is pressed
    */
-  Button(const sf::Vector2f &position, const sf::Vector2f &size,
-               const sf::RectangleShape &shape, const sf::Color &color,
-               const sf::Text &text, const sf::Font &font,
-               unsigned int font_size, const std::function<void()> &on_click);
+  Button(const sf::Vector2f &position, const sf::RectangleShape &shape,
+         const sf::Color &color, const sf::Text &text, const sf::Font &font,
+         unsigned int font_size, const std::function<void()> &on_click);
 
   /**
    * @brief Handles events to determine whether to trigger the on_click function

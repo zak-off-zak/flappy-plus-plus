@@ -9,8 +9,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Mouse.hpp>
 
-Button::Button()
-    : shape(), text(this->font), font(), on_click([]() {}) {
+Button::Button() : shape(), text(this->font), font(), on_click([]() {}) {
   // Set up a default white button in the top left corner of the screen with the
   // size of 100 by 50
   this->shape.setPosition({0.f, 0.f});
@@ -22,16 +21,13 @@ Button::Button(const Button &other)
     : shape(other.shape), on_click(other.on_click), text(other.text),
       font(other.font) {}
 
-Button::Button(const sf::Vector2f &position,
-                           const sf::Vector2f &size,
-                           const sf::RectangleShape &shape,
-                           const sf::Color &color, const sf::Text &text,
-                           const sf::Font &font, unsigned int font_size,
-                           const std::function<void()> &on_click)
+Button::Button(const sf::Vector2f &position, const sf::RectangleShape &shape,
+               const sf::Color &color, const sf::Text &text,
+               const sf::Font &font, unsigned int font_size,
+               const std::function<void()> &on_click)
     : shape(shape), text(font), on_click(on_click) {
   // Set the position, size and color of the custom buttons shape
   this->shape.setPosition(position);
-  this->shape.setSize(size);
   this->shape.setFillColor(color);
 
   this->text = text;
@@ -41,7 +37,7 @@ Button::Button(const sf::Vector2f &position,
 }
 
 void Button::handle_event(const std::optional<sf::Event> &event,
-                                const sf::RenderWindow &window) {
+                          const sf::RenderWindow &window) {
   // Check if the left button of the mouse has been pressed
   if (event->is<sf::Event::MouseButtonPressed>() &&
       sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
@@ -56,8 +52,7 @@ void Button::handle_event(const std::optional<sf::Event> &event,
   }
 }
 
-void Button::draw(sf::RenderTarget &target,
-                        sf::RenderStates states) const {
+void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const {
   target.draw(shape, states);
   target.draw(this->text, states);
 }
