@@ -14,7 +14,7 @@
 
 /**
  * @class Button
- * @brief A custom consisting of a shape, text and an event handler
+ * @brief A custom Button consisting of a shape, text and an event handler
  *
  */
 class Button : public sf::Drawable {

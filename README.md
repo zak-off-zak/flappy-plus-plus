@@ -57,10 +57,17 @@ For wiping the assets please use the following:
 ```
 rm -rf  ~/assets
 ```
+## Code Documentation
+This project has been documented using the [Doxygen](https://www.doxygen.nl/). For generating the documentation from code please use the following command:
+```
+doxygen Doxyfile
+```
+After the generation is completed, the documentation can be found in the `./docs/generated/html/index.html`.
+Only the header files have been documented using Doxygen. The code of this project also includes comments in the `*.cpp` for clarity.
 
 ## References
 ### SFML-Template
 This project has been built on top ot the [SFML-Template](https://github.com/SFML/cmake-sfml-project). Please see instruction presented in the templates repository if any further questions arise.
 
 ### Asset pack by Kenney Vleugels
-This project uses the assets kindly provided by by Kenney Vleugels (www.kenney.nl). Licenses can for all of the used assets packs can be found in the assets folder of this project.
+This project uses the assets kindly provided by by Kenney Vleugels [(www.kenney.nl)](www.kenney.nl). Licenses can for all of the used assets packs can be found in the assets folder of this project.
