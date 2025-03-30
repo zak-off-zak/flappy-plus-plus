@@ -50,21 +50,19 @@ const sf::Font &Game::get_ui_font() { return this->ui_font; }
 void Game::load_textures() {
   // Load the background texture
   if (!this->background_texture.loadFromFile(
-          "assets/kenney_physics-assets/PNG/Backgrounds/blue_desert.png")) {
+          "assets/Backgrounds/blue_desert.png")) {
     std::cerr << "Error loading background texture!" << std::endl;
   }
 
   // Load the bird texture
   if (!this->bird_texture.loadFromFile(
-          "assets/kenney_physics-assets/Spritesheet/"
-          "spritesheet_aliens.png")) {
+          "assets/Spritesheets/spritesheet_aliens.png")) {
     std::cerr << "Error loading bird texture!" << std::endl;
   }
 
   // Load the pipes texture
   if (!this->pipe_texture.loadFromFile(
-          "assets/kenney_physics-assets/Spritesheet/"
-          "spritesheet_explosive.png")) {
+          "assets/Spritesheets/spritesheet_explosive.png")) {
     std::cerr << "Error loading pipe texture!" << std::endl;
   }
 }
@@ -72,7 +70,7 @@ void Game::load_textures() {
 void Game::load_fonts() {
   // Load the UI font
   if (!this->ui_font.openFromFile(
-          "assets/kenney_ui-pack/Font/Kenney Future.ttf")) {
+          "assets/Fonts/Kenney Future.ttf")) {
     std::cerr << "Error loading ui font!" << std::endl;
   }
 }
