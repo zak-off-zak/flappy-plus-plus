@@ -27,6 +27,13 @@ Even thought, the full potential of the `Physics` class has been used in the ret
 ### Collision Detection
 The collision detection has been implemented on top of the functionality provided by the SFML-Library, as it makes it possible to check, whether two rectangles overlap. Any collision of the bird with the frame of the window or with any of the pipes will cause the game over.
 
+### Game Mechanics
+In this game following actions can be performed by a player:
+- `SPACE` - makes the bird flap once
+- `ESC` - toggles the menu
+- `RESUME BUTTON` - resumes the game after a the menu was triggered
+- `RESTART BUTTON` - restarts the game (the current score is lost)  
+
 ## Running the project
 
 ### Requirements
