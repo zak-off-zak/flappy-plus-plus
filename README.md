@@ -27,6 +27,13 @@ Even thought, the full potential of the `Physics` class has been used in the ret
 ### Collision Detection
 The collision detection has been implemented on top of the functionality provided by the SFML-Library, as it makes it possible to check, whether two rectangles overlap. Any collision of the bird with the frame of the window or with any of the pipes will cause the game over.
 
+### Game Mechanics
+In this game following actions can be performed by a player:
+- `SPACE` - makes the bird flap once
+- `ESC` - toggles the menu
+- `RESUME BUTTON` - resumes the game after a the menu was triggered
+- `RESTART BUTTON` - restarts the game (the current score is lost)  
+
 ## Running the project
 
 ### Requirements
@@ -57,10 +64,21 @@ For wiping the assets please use the following:
 ```
 rm -rf  ~/assets
 ```
+## Code Documentation
+This project has been documented using the [Doxygen](https://www.doxygen.nl/). For generating the documentation from code please use the following command:
+```
+doxygen Doxyfile
+```
+After the generation is completed, the documentation can be found in the `./docs/generated/html/index.html`.
+Only the header files have been documented using Doxygen. The code of this project also includes comments in the `*.cpp` for clarity.
 
 ## References
 ### SFML-Template
 This project has been built on top ot the [SFML-Template](https://github.com/SFML/cmake-sfml-project). Please see instruction presented in the templates repository if any further questions arise.
 
 ### Asset pack by Kenney Vleugels
-This project uses the assets kindly provided by by Kenney Vleugels (www.kenney.nl). Licenses can for all of the used assets packs can be found in the assets folder of this project.
+This project uses the assets kindly provided by by Kenney Vleugels [(www.kenney.nl)](www.kenney.nl). Licenses can for all of the used assets packs can be found in the assets folder of this project.
+
+## Inspiration
+Some parts of this project were inspired by AI-Systems such as ChatGPT and Copilot. Those systems were also used during the debugging.
+

@@ -1,5 +1,5 @@
-#include "../include/Bird.h"
-#include "../include/Utilities.h"
+#include "Bird.h"
+#include "Utilities.h"
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 

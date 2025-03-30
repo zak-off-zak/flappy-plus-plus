@@ -1,6 +1,6 @@
-#include "../include/Game.h"
-#include "../include/MenuState.h"
-#include "../include/PlayState.h"
+#include "Game.h"
+#include "MenuState.h"
+#include "PlayState.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <random>

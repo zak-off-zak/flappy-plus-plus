@@ -1,4 +1,4 @@
-#include "../include/Physics.h"
+#include "Physics.h"
 #include <SFML/System/Vector2.hpp>
 #include <algorithm>
 

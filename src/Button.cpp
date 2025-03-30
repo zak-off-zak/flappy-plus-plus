@@ -1,4 +1,4 @@
-#include "../include/Button.h"
+#include "Button.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>

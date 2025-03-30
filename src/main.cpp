@@ -1,6 +1,6 @@
-#include "../include/Game.h"
-#include "../include/GreetingsScreenState.h"
-#include "../include/PlayState.h"
+#include "Game.h"
+#include "GreetingsScreenState.h"
+#include "PlayState.h"
 #include <memory>
 
 int main() {

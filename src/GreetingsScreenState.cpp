@@ -1,6 +1,6 @@
-#include "../include/GreetingsScreenState.h"
-#include "../include/Game.h"
-#include "../include/MenuState.h"
+#include "GreetingsScreenState.h"
+#include "Game.h"
+#include "MenuState.h"
 #include <SFML/Graphics/Color.hpp>
 #include <memory>
 
@@ -18,7 +18,6 @@ void GreetingsScreenState::init(Game &game) {
       {float(window_size.x) / background_bounds.size.x,
        float(window_size.y) / background_bounds.size.y});
 
-  // TODO: Check all vectors to be declared in the same way
 
   // Init an overlay to make background appear a bit darker
   this->overlay =

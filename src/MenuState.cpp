@@ -1,6 +1,6 @@
-#include "../include/MenuState.h"
-#include "../include/Game.h"
-#include "../include/PlayState.h"
+#include "MenuState.h"
+#include "Game.h"
+#include "PlayState.h"
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -30,8 +30,6 @@ void MenuState::init(Game &game) {
   this->background_sprite.setScale(
       {float(window_size.x) / background_bounds.size.x,
        float(window_size.y) / background_bounds.size.y});
-
-  // TODO: Check all vectors to be declared in the same way
 
   // Init an overlay to make background appear a bit darker
   this->overlay =
