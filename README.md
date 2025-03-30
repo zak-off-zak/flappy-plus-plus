@@ -78,3 +78,7 @@ This project has been built on top ot the [SFML-Template](https://github.com/SFM
 
 ### Asset pack by Kenney Vleugels
 This project uses the assets kindly provided by by Kenney Vleugels [(www.kenney.nl)](www.kenney.nl). Licenses can for all of the used assets packs can be found in the assets folder of this project.
+
+## Inspiration
+Some parts of this project were inspired by AI-Systems such as ChatGPT and Copilot. Those systems were also used during the debugging.
+
