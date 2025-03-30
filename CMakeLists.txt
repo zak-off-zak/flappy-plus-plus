@@ -16,6 +16,7 @@ FetchContent_MakeAvailable(SFML)
 file(GLOB SRC_FILES src/*.cpp)
 add_executable(main ${SRC_FILES})
 target_compile_features(main PRIVATE cxx_std_17)
-target_link_libraries(main PRIVATE SFML::Graphics)
+target_link_libraries(main PRIVATE SFML::Graphics SFML::Window SFML::System)
 target_include_directories(main PUBLIC ${PROJECT_SOURCE_DIR}/include PRIVATE ${PROJECT_SOURCE_DIR}/src)
 target_compile_definitions(main PRIVATE SFML_STATIC)
+
