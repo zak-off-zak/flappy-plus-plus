@@ -1,6 +1,6 @@
-#include "../include/GreetingsScreenState.h"
-#include "../include/Game.h"
-#include "../include/MenuState.h"
+#include "GreetingsScreenState.h"
+#include "Game.h"
+#include "MenuState.h"
 #include <SFML/Graphics/Color.hpp>
 #include <memory>
 

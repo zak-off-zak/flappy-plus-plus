@@ -1,4 +1,4 @@
-#include "../include/Utilities.h"
+#include "Utilities.h"
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Texture.hpp>
