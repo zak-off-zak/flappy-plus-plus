@@ -14,7 +14,7 @@ debug_conf:
 build: configure
 	@echo "[BUILD LOGS]: Building using CMake"
 	cmake --build $(BUILD_DIR)
-	cp -r $(ASSETS_DIR) ~
+	cp -r $(ASSETS_DIR) ~ # Copying the assets to the home dicrectory to enbale a smooth run when the game is run by double clicking on it in the finder
 
 run: build
 	@echo "[BUILD LOGS]: Running main"
