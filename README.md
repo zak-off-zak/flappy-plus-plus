@@ -1,6 +1,8 @@
 # Flappy-Plus-Plus
 This project is a recreation of the iconic Flappy Bird Game using the SFML and C++.
 
+<img width="1182" height="583" alt="greetings_screen" src="https://github.com/user-attachments/assets/8136a046-fc21-44d5-b177-c7db277b16ba" />
+
 ## Overview
 ### State Pattern
 This project utilizes a simplified version of the [state pattern](https://refactoring.guru/design-patterns/state). 
