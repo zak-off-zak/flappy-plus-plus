@@ -18,11 +18,11 @@ The states are stored on a stack. This allows an easy switch between them by usi
 ### Simple Newtonian Physics
 The `Physics` class includes some simple logic to model the behavior of a physical object inside of the 2D world. The implementation relies on the basic Newtonian Laws of motion. Using the functionality of this class an object of a certain mass can be created. Afterwards a force can be applied to it, that will make it gain acceleration and velocity and, therefore, change its position.
 
-In oder to prevent the object from gaining the velocity indecently it was clipped to some fixed value. 
+In order to prevent the object from gaining the velocity indecently it was clipped to some fixed value. 
 
 The functionality of this class has been used in the `Bird` class in order to model a realistically looking falling of the bird. On the other hand, the `Pipe` class does not used the functionally of the `Physics` class, as the pipes do only need a constant speed to be managed by the program in order to be rendered correctly. Consequently, the used of the `Physics` class would be an overkill in this case.
 
-Even thought, the full potential of the `Physics` class has been used in the ret of the project, it was still a gerate exercise in modelling the real life physics.
+Even thought, the full potential of the `Physics` class has been used in the rest of the project, it was still a generate exercise in modelling the real life physics.
 
 ### Collision Detection
 The collision detection has been implemented on top of the functionality provided by the SFML-Library, as it makes it possible to check, whether two rectangles overlap. Any collision of the bird with the frame of the window or with any of the pipes will cause the game over.
@@ -31,7 +31,7 @@ The collision detection has been implemented on top of the functionality provide
 In this game following actions can be performed by a player:
 - `SPACE` - makes the bird flap once
 - `ESC` - toggles the menu
-- `RESUME BUTTON` - resumes the game after a the menu was triggered
+- `RESUME BUTTON` - resumes the game after the menu was triggered
 - `RESTART BUTTON` - restarts the game (the current score is lost)  
 
 ## Running the project
@@ -56,7 +56,7 @@ cmake -B build
 cmake --build build
 cp -r assets ~
 ```
-After building the project it can be rund using the following command:
+After building the project it can be run using the following command:
 ```
 ./build/bin/main
 ```
@@ -74,10 +74,10 @@ Only the header files have been documented using Doxygen. The code of this proje
 
 ## References
 ### SFML-Template
-This project has been built on top ot the [SFML-Template](https://github.com/SFML/cmake-sfml-project). Please see instruction presented in the templates repository if any further questions arise.
+This project has been built on top of the [SFML-Template](https://github.com/SFML/cmake-sfml-project). Please see instruction presented in the templates repository if any further questions arise.
 
 ### Asset pack by Kenney Vleugels
-This project uses the assets kindly provided by by Kenney Vleugels [(www.kenney.nl)](www.kenney.nl). Licenses can for all of the used assets packs can be found in the assets folder of this project.
+This project uses the assets kindly provided by by Kenney Vleugels ([www.kenney.nl](https://www.kenney.nl)). Licenses can for all of the used assets packs can be found in the assets folder of this project.
 
 ## Inspiration
 Some parts of this project were inspired by AI-Systems such as ChatGPT and Copilot. Those systems were also used during the debugging.
