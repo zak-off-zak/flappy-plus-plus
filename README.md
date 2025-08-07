@@ -77,7 +77,7 @@ Only the header files have been documented using Doxygen. The code of this proje
 This project has been built on top of the [SFML-Template](https://github.com/SFML/cmake-sfml-project). Please see instruction presented in the templates repository if any further questions arise.
 
 ### Asset pack by Kenney Vleugels
-This project uses the assets kindly provided by by Kenney Vleugels [(www.kenney.nl)](www.kenney.nl). Licenses can for all of the used assets packs can be found in the assets folder of this project.
+This project uses the assets kindly provided by by Kenney Vleugels ([www.kenney.nl](https://www.kenney.nl)). Licenses can for all of the used assets packs can be found in the assets folder of this project.
 
 ## Inspiration
 Some parts of this project were inspired by AI-Systems such as ChatGPT and Copilot. Those systems were also used during the debugging.
